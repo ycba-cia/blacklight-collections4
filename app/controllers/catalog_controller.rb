@@ -5,6 +5,32 @@ class CatalogController < ApplicationController
 
   include Blacklight::Catalog
 
+  before_action :getID, only: [:show]
+
+  #ERJ: for reference https://github.com/projectblacklight/blacklight/wiki/Adding-new-document-actions
+
+  def cite
+    idd = params[:id]
+    document = SolrDocument.find(idd)
+    @apa = document.getAPA
+    @mla = document.getMLA
+    respond_to do |format|
+      format.html
+    end
+  end
+
+  def getID
+    @id = params[:id]
+  end
+
+  rescue_from Blacklight::Exceptions::RecordNotFound do
+    render 'record_not_found', status: 404
+  end
+
+  #rescue_from Blacklight::Exceptions::ECONNREFUSED do
+  #  render 'econnrefused'
+  #end
+
   # If you'd like to handle errors returned by Solr in a certain way,
   # you can use Rails rescue_from with a method you define in this controller,
   # uncomment:
@@ -12,6 +38,11 @@ class CatalogController < ApplicationController
   # rescue_from Blacklight::Exceptions::InvalidRequest, with: :my_handling_method
 
   configure_blacklight do |config|
+    config.view.gallery(document_component: Blacklight::Gallery::DocumentComponent, icon: Blacklight::Gallery::Icons::GalleryComponent)
+    config.view.masonry(document_component: Blacklight::Gallery::DocumentComponent, icon: Blacklight::Gallery::Icons::MasonryComponent)
+    config.view.slideshow(document_component: Blacklight::Gallery::SlideshowComponent, icon: Blacklight::Gallery::Icons::SlideshowComponent)
+    config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
+    config.show.partials.insert(1, :openseadragon)
     ## Specify the style of markup to be generated (may be 4 or 5)
     # config.bootstrap_version = 5
     #
@@ -40,10 +71,14 @@ class CatalogController < ApplicationController
     #config.document_solr_path = 'get'
 
     # items to show per page, each number in the array represent another option to choose from.
-    #config.per_page = [10,20,50,100]
+    config.per_page = [100,50,15]
 
     # solr field configuration for search results/index views
     config.index.title_field = 'title_tsim'
+    config.index.title_field = 'title_ss'
+    config.index.display_type_field = 'recordtype_ss'
+    config.show.display_type_field = 'recordtype_ss'
+
     # config.index.display_type_field = 'format'
     # config.index.thumbnail_field = 'thumbnail_path_ss'
 
@@ -108,22 +143,30 @@ class CatalogController < ApplicationController
     #  (useful when user clicks "more" on a large facet and wants to navigate alphabetically across a large set of results)
     # :index_range can be an array or range of prefixes that will be used to create the navigation (note: It is case sensitive when searching values)
 
-    config.add_facet_field 'format', label: 'Format'
-    config.add_facet_field 'pub_date_ssim', label: 'Publication Year', single: true
-    config.add_facet_field 'subject_ssim', label: 'Topic', limit: 20, index_range: 'A'..'Z'
-    config.add_facet_field 'language_ssim', label: 'Language', limit: true
-    config.add_facet_field 'lc_1letter_ssim', label: 'Call Number'
-    config.add_facet_field 'subject_geo_ssim', label: 'Region'
-    config.add_facet_field 'subject_era_ssim', label: 'Era'
-
-    config.add_facet_field 'example_pivot_field', label: 'Pivot Field', pivot: ['format', 'language_ssim'], collapsing: true
-
-    config.add_facet_field 'example_query_facet_field', label: 'Publish Date', :query => {
-       :years_5 => { label: 'within 5 Years', fq: "pub_date_ssim:[#{Time.zone.now.year - 5 } TO *]" },
-       :years_10 => { label: 'within 10 Years', fq: "pub_date_ssim:[#{Time.zone.now.year - 10 } TO *]" },
-       :years_25 => { label: 'within 25 Years', fq: "pub_date_ssim:[#{Time.zone.now.year - 25 } TO *]" }
-    }
-
+    config.add_facet_field 'collection_ss', :label => 'Collection', :limit => 20, :collapse => false, :sort => 'count'
+    config.add_facet_field 'loc_naf_author_ss', label: 'Creator', :limit => 20
+    config.add_facet_field 'earliestDate_is', :label => 'Date', single: true,range: { segments: false }
+    config.add_facet_field 'detailed_onview_ss', :label => 'On-site Access'
+    config.add_facet_field 'rights_ss',label: 'Image Use'
+    config.add_facet_field 'has_image_ss', helper_method: 'capitalize', :label => 'Image Available'
+    y = Time.now.year
+    config.add_facet_field 'date_entered_is', :label => 'New Additions', query: { past_year: { label: "#{y-1}-#{y}",fq: "date_entered_is:[#{y-1} TO #{y}]"}}
+    config.add_facet_field 'type_ss', :label => 'Classification', :limit => 20
+    config.add_facet_field 'author_gender_ss', :label => 'Creator Gender'
+    config.add_facet_field 'title_collective_ss', :label => 'Collective Title', :limit => 20
+    config.add_facet_field 'era_ss', :label => 'Period'
+    config.add_facet_field 'auth_format_ss', :label => 'Medium', :limit => 20
+    config.add_facet_field 'physical_heightValue_is', :label => 'Height [cm]',range: { segments: false }
+    config.add_facet_field 'physical_widthValue_is', :label => 'Width [cm]',range: { segments: false }
+    config.add_facet_field 'object_name_ss', :label => 'Work Type', :limit => 20
+    config.add_facet_field 'genre_name_ss', :label => 'Genre', :limit => 20
+    config.add_facet_field 'topic_ss', :label => 'Subject Terms', :limit => 20
+    config.add_facet_field 'subject_period_ss', :label => 'Subject Period', :limit => 20
+    config.add_facet_field 'geographic_ss', :label => 'Associated Places', :limit => 20
+    config.add_facet_field 'topic_subjectActor_ss', :label => 'Associated People', :limit => 20
+    config.add_facet_field 'exhibition_history_ss', :label => 'Exhibition History', :limit => 20
+    config.add_facet_field 'credit_line_ss', :label => 'Credit Line', :limit => 20
+    config.add_facet_field 'language_name_ss', :label => 'Language', :limit => 20 #marc only
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -132,32 +175,75 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field 'title_tsim', label: 'Title'
-    config.add_index_field 'title_vern_ssim', label: 'Title'
-    config.add_index_field 'author_tsim', label: 'Author'
-    config.add_index_field 'author_vern_ssim', label: 'Author'
-    config.add_index_field 'format', label: 'Format'
-    config.add_index_field 'language_ssim', label: 'Language'
-    config.add_index_field 'published_ssim', label: 'Published'
-    config.add_index_field 'published_vern_ssim', label: 'Published'
-    config.add_index_field 'lc_callnum_ssim', label: 'Call number'
+    config.add_index_field 'author_ss', :label => 'Creator', if: :display_lido_field?
+    config.add_index_field 'loc_naf_author_ss', :label => 'Creator', if: :display_marc_field?
+    config.add_index_field 'publishDate_txt', label: "Date"
+    config.add_index_field 'format_txt', :label => 'Medium'
+    config.add_index_field 'physical_txt', :label => 'Dimensions', if: :display_lido_field?
+    config.add_index_field 'physical_ss', :label => 'Physical Description', if: :display_marc_field?
+    config.add_index_field 'collection_txt', :label => 'Collection'
+    config.add_index_field 'credit_line_txt', :label => 'Credit Line'
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
-    config.add_show_field 'title_tsim', label: 'Title'
-    config.add_show_field 'title_vern_ssim', label: 'Title'
-    config.add_show_field 'subtitle_tsim', label: 'Subtitle'
-    config.add_show_field 'subtitle_vern_ssim', label: 'Subtitle'
-    config.add_show_field 'author_tsim', label: 'Author'
-    config.add_show_field 'author_vern_ssim', label: 'Author'
-    config.add_show_field 'format', label: 'Format'
-    config.add_show_field 'url_fulltext_ssim', label: 'URL'
-    config.add_show_field 'url_suppl_ssim', label: 'More Information'
-    config.add_show_field 'language_ssim', label: 'Language'
-    config.add_show_field 'published_ssim', label: 'Published'
-    config.add_show_field 'published_vern_ssim', label: 'Published'
-    config.add_show_field 'lc_callnum_ssim', label: 'Call number'
-    config.add_show_field 'isbn_ssim', label: 'ISBN'
+    break_separator = {words_connector: ' <br/> ', last_word_connector: ' <br/> ', two_words_connector: ' <br/> '}
+    comma_separator = {words_connector: ', ', last_word_connector: ', ', two_words_connector: ', '}
+
+    #lido fields in detailed view
+    #config.add_show_field 'author_ss', :label => 'Creator', link_to_search: true, separator_options: break_separator, helper_method: 'handle_qualifiers', if: :display_lido_field?
+    config.add_show_field 'loc_naf_author_ss', :label => 'Creator', link_to_search: true, separator_options: break_separator, helper_method: 'handle_qualifiers2', if: :display_lido_field?
+    config.add_show_field 'titles_primary_ss', :label => 'Title', helper_method: 'render_titles_all', if: :display_lido_field?
+    config.add_show_field 'titles_former_ss', :label => 'Former Title(s)', helper_method: 'render_titles_all', if: :display_lido_field?
+    config.add_show_field 'titles_additional_ss', :label => 'Additional Title(s)', helper_method: 'render_titles_all', if: :display_lido_field?
+    config.add_show_field 'title_collective_ss', :label => 'Part Of', helper_method: 'render_parent', :limit => 20
+    config.add_show_field 'publishDate_ss', :label => 'Date', if: :display_lido_field?
+    config.add_show_field 'format_ss', :label => 'Medium', if: :display_lido_field?
+    config.add_show_field 'physical_ss',  :label => 'Dimensions', separator_options: comma_separator, if: :display_lido_field?
+    config.add_show_field 'description_ss', :label => 'Inscription(s)/Marks/Lettering', helper_method: 'render_citation', if: :display_lido_field?
+    config.add_show_field 'credit_line_ss', :label => 'Credit Line', if: :display_lido_field?
+    config.add_show_field 'dummy_ort_lido_acc', :accessor => 'dummy_ort_lido_acc', :label => 'Copyright Status', helper_method: 'render_copyright_status', if: :display_lido_accessor_field?
+    config.add_show_field 'callnumber_ss', :label => 'Object Number', if: :isLidoLoan?
+    config.add_show_field 'callnumber_txt', :label => 'Accession Number', unless: :isLidoLoan?
+    config.add_show_field 'type_ss', :label => 'Classification', if: :display_lido_field?
+    config.add_show_field 'collection_ss', :label => 'Collection', helper_method: 'handle_lido_collections', if: :display_lido_field?
+    config.add_show_field 'topic_ss', :label => 'Subject Terms', link_to_search: 'topic_facet', separator_options: break_separator, helper_method: 'sort_values_and_link_to_facet_frames', if: :display_lido_field?
+    config.add_show_field 'topic_subjectPlace_ss', :label => 'Associated Places', link_to_search: true, separator_options: break_separator, helper_method: 'sort_values_and_link_to_facet', if: :display_lido_field?
+    config.add_show_field 'topic_subjectActor_ss', :label => 'Associated People', link_to_search: true, separator_options: break_separator, if: :display_lido_field?
+    config.add_show_field 'topic_frameAlteration_ss', :label => 'Frame Alteration', link_to_search: true, separator_options: break_separator, if: :display_lido_field?
+    config.add_show_field 'topic_frameStatus_ss', :label => 'Frame Status', link_to_search: true, separator_options: break_separator, if: :display_lido_field?
+    config.add_show_field 'topic_frameOrnament_ss', :label => 'Frame Ornament', separator_options: break_separator, if: :display_lido_field?
+    config.add_show_field 'topic_frameFeature_ss', :label => 'Frame Feature', link_to_search: true, separator_options: break_separator, if: :display_lido_field?
+    config.add_show_field 'topic_frameStyle_ss', :label => 'Frame Style', link_to_search: true, separator_options: break_separator, if: :display_lido_field?
+    config.add_show_field 'detailed_onview_ss',helper_method: 'render_aeon_from_access', :label => 'Access', if: :display_lido_field?
+    config.add_show_field 'curatorial_comment_ss', :label => 'Curatorial Comment', helper_method: 'combine_curatorial_comments', if: :display_lido_field?
+    config.add_show_field 'exhibition_history_ss', :label => 'Exhibition History', helper_method: 'render_exhibitions', if: :display_lido_field?
+    config.add_show_field 'citation_txt', :label => 'Publications', helper_method: 'render_tms_citation_presorted', if: :display_lido_field?
+    config.add_show_field 'url_ss', :label => 'Link', helper_method: 'render_as_link', if: :display_lido_field?
+
+    #marc fields in detailed view (note: accessors needed when field both in marc and lido, and special display_marc_accessor_field method to not show empty fields)
+    config.add_show_field 'loc_naf_author_acc', :accessor => 'loc_naf_author_acc',  :label => 'Creator', helper_method: 'link_to_author', separator_options: break_separator, if: :display_marc_accessor_field?
+    #config.add_show_field 'title_acc', :accessor => 'title_acc', :label => 'Title', helper_method: 'add_alt_title', if: :display_marc_accessor_field?
+    #config.add_show_field 'title_alt_ss', :label => 'Alternate Title(s)', helper_method: 'add_alt_title_alt', separator_options: break_separator, if: :display_marc_field?
+    config.add_show_field 'title_acc', :accessor => 'title_acc', :label => 'Title(s)', helper_method: 'render_titles_all', if: :display_marc_accessor_field?
+    config.add_show_field 'titles_former_acc', :accessor => 'titles_former_acc', :label => 'Former Title(s)', helper_method: 'render_titles_all', if: :display_marc_accessor_field?
+    config.add_show_field 'titles_additional_acc', :accessor => 'titles_additional_acc', :label => 'Additional Title(s)', helper_method: 'render_titles_all', if: :display_marc_accessor_field?
+    config.add_show_field 'edition_ss', label: 'Edition', helper_method: 'add_alt_edition', if: :display_marc_field?
+    config.add_show_field 'publisher_ss', :label => 'Published/Created', helper_method: 'add_alt_publisher', separator_options: break_separator, if: :display_marc_field?
+    config.add_show_field 'physical_acc', accessor: 'physical_acc', label: 'Physical Description', if: :display_marc_accessor_field?
+    #holdings inserted here, see _show_marc_html.erb
+    config.add_show_field 'dummy_ort_marc_acc', :accessor => 'dummy_ort_marc_acc', :label => 'Copyright Status', helper_method: 'render_copyright_status', if: :display_marc_accessor_field?
+    config.add_show_field 'orbis_link_acc', accessor: 'orbis_link_acc', :label => 'Full Orbis Record', helper_method: 'render_as_link', if: :display_marc_accessor_field?
+    config.add_show_field 'resourceURL_ss', :label => 'Related Content', helper_method: 'render_related_content', if: :render_related_content?
+    config.add_show_field 'type_acc', accessor: 'type_acc', :label => 'Classification', if: :display_marc_accessor_field?
+    config.add_show_field 'cartographic_detail_ss', :label => 'Scale', if: :display_marc_field?
+    config.add_show_field 'note_acc', accessor: 'note_acc', :label => 'Notes', helper_method: 'add_alt_description', if: :display_marc_accessor_field?
+    #config.add_show_field 'marc_contents_ss', label: 'Contents', helper_method: 'format_contents', if: :display_marc_field? #Note: moved to tab
+    config.add_show_field 'exhibition_history_acc', accessor: 'exhibition_history_acc', :label => 'Exhibition History', helper_method: 'render_exhibitions', if: :display_marc_field?
+    config.add_show_field 'topic_acc', accessor: 'topic_acc', :label => 'Subject Terms', link_to_search: 'topic_facet', separator_options: break_separator, helper_method: 'sort_values_and_link_to_topic_no_pipes', if: :display_marc_accessor_field?
+    config.add_show_field 'form_genre_ss', :label => 'Form/Genre', link_to_search: true, separator_options: break_separator, if: :display_marc_field?
+    config.add_show_field 'author_additional_ss', :label => 'Contributors', link_to_search: true, separator_options: break_separator, if: :display_marc_field?
+    #config.add_show_field 'cite_as', accessor: 'cite_as', :label => 'Cite As', if: :display_marc_accessor_field? #don't display per #18
+
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
@@ -177,59 +263,122 @@ class CatalogController < ApplicationController
     # solr request handler? The one set in config[:default_solr_parameters][:qt],
     # since we aren't specifying it otherwise.
 
-    config.add_search_field 'all_fields', label: 'All Fields'
+    config.add_search_field 'simple_search', label: 'Simple Search'
+
+    config.add_search_field('All Fields') do |field|
+      #field.solr_parameters = { :'spellcheck.dictionary' => 'author' }
+      field.solr_parameters = {
+          qf: [
+              'author_txt^10',
+              'title_txt^4',
+              'topic_txt^4',
+              'publishDate_txt',
+              'format_txt',
+              'physical_txt',
+              'description_txt',
+              'credit_line_txt',
+              'callnumber_txt',
+              'type_txt',
+              'collection_txt',
+              'geographic_txt',
+              'topic_subjectActor_txt^3',
+              'title_alt_txt',
+              'publisher_txt',
+              'resourceURL_txt',
+              'cartographic_detail_txt',
+              'marc_contents_txt',
+              'form_genre_txt',
+              'author_additional_txt',
+              'exhibition_history_txt',
+              'curatorial_comment_txt',
+              'curatorial_comment_auth_txt',
+              'curatorial_description_txt',
+              'curatorial_description_auth_txt',
+              'pub_cat_entry_txt',
+              'pub_cat_entry_auth_txt',
+              'gallery_label_txt',
+              'gallery_label_auth_txt'
+          ]
+      }
+    end
 
 
     # Now we see how to over-ride Solr request handler defaults, in this
     # case for a BL "search field", which is really a dismax aggregate
     # of Solr search fields.
 
-    config.add_search_field('title') do |field|
+    config.add_search_field('Title') do |field|
       # solr_parameters hash are sent to Solr as ordinary url query params.
+      #field.solr_parameters = { :'spellcheck.dictionary' => 'title' }
+
+      # :solr_local_parameters will be sent using Solr LocalParams
+      # syntax, as eg {! qf=$title_qf }. This is neccesary to use
+      # Solr parameter de-referencing like $title_qf.
+      # See: http://wiki.apache.org/solr/LocalParams
       field.solr_parameters = {
-        'spellcheck.dictionary': 'title',
-        qf: '${title_qf}',
-        pf: '${title_pf}'
+          qf: ['title_txt^10'],
+          pf: ['title_txt^20']
       }
     end
 
-    config.add_search_field('author') do |field|
+    config.add_search_field('Creator') do |field|
+      #field.solr_parameters = { :'spellcheck.dictionary' => 'author' }
       field.solr_parameters = {
-        'spellcheck.dictionary': 'author',
-        qf: '${author_qf}',
-        pf: '${author_pf}'
+          qf: ['author_txt^10'],
+          pf: ['author_txt^20']
       }
     end
 
     # Specifying a :qt only to show it's possible, and so our internal automated
     # tests can test it. In this case it's the same as
     # config[:default_solr_parameters][:qt], so isn't actually neccesary.
-    config.add_search_field('subject') do |field|
-      field.qt = 'search'
+    config.add_search_field('Subject Terms') do |field|
+      #field.solr_parameters = { :'spellcheck.dictionary' => 'subject' }
+      #field.qt = 'search'
       field.solr_parameters = {
-        'spellcheck.dictionary': 'subject',
-        qf: '${subject_qf}',
-        pf: '${subject_pf}'
+          qf: ['topic_txt^10'],
+          pf: ['topic_txt^20']
       }
     end
+
+    config.add_search_field('Call Number') do |field|
+      field.solr_parameters = {
+          qf: ['callnumber_txt^10']
+      }
+    end
+
+    config.add_search_field('Search Provenance') do |field|
+      field.solr_parameters = {
+          qf: ['provenance_txt^10'],
+          pf: ['provenence_txt^20']
+      }
+    end
+
+    config.add_search_field('Fielded') do |field|
+      field.solr_parameters = {
+          qt: '/query'
+      }
+    end
+
 
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the Solr field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
     # except in the relevancy case). Add the sort: option to configure a
     # custom Blacklight url parameter value separate from the Solr sort fields.
-    config.add_sort_field 'relevance', sort: 'score desc, pub_date_si desc, title_si asc', label: 'relevance'
-    config.add_sort_field 'year-desc', sort: 'pub_date_si desc, title_si asc', label: 'year'
-    config.add_sort_field 'author', sort: 'author_si asc, title_si asc', label: 'author'
-    config.add_sort_field 'title_si asc, pub_date_si desc', label: 'title'
+    config.add_sort_field 'collection_sort_s asc, score desc', label: 'collection'
+    config.add_sort_field 'score desc', label: 'relevance'
+    config.add_sort_field 'author_sort_s asc, score desc', label: ' artist (A-Z)'
+    config.add_sort_field 'earliestDate_i asc, score desc', label: 'date'
+    config.add_sort_field 'title_s asc, score desc', label: 'title (A-Z)'
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.
     config.spell_max = 5
 
     # Configuration for autocomplete suggester
-    config.autocomplete_enabled = true
-    config.autocomplete_path = 'suggest'
+    #config.autocomplete_enabled = true
+    #config.autocomplete_path = 'suggest'
     # if the name of the solr.SuggestComponent provided in your solrconfig.xml is not the
     # default 'mySuggester', uncomment and provide it below
     # config.autocomplete_suggester = 'mySuggester'

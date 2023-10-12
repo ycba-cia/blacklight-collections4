@@ -6,6 +6,10 @@ ruby "3.2.2"
 gem "rails", "~> 7.1.1"
 
 gem 'blacklight', '~> 8.0', '>= 8.0.1'
+gem 'blacklight_range_limit', '~> 8.3'
+gem 'blacklight-gallery', '~> 4.3'
+gem 'jquery-rails', '~> 4.6'
+gem 'turbolinks', '~> 5.2', '>= 5.2.1'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -75,3 +79,4 @@ end
 gem "rsolr", ">= 1.0", "< 3"
 gem "bootstrap", "\~\>\ 5.1"
 gem "sassc-rails", "~> 2.1"
+gem "openseadragon", ">= 0.2.0"
