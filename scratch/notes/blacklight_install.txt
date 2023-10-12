@@ -1,0 +1,107 @@
+bundle install
+Fetching gem metadata from https://rubygems.org/........
+Resolving dependencies...
+Fetching view_component 3.0.0
+Installing view_component 3.0.0
+Fetching blacklight 8.0.1
+Installing blacklight 8.0.1
+Bundle complete! 15 Gemfile dependencies, 90 gems now installed.
+Use `bundle info [gemname]` to see where a bundled gem is installed.
+MWC02Y20P1JHD5:blacklight-collections4 ermadmix$ rails generate blacklight:install
+    generate  blacklight:solr
+       rails  generate blacklight:solr
+     gemfile  group :development, :test
+        gsub  Gemfile
+     gemfile  solr_wrapper (>= 0.3)
+        gsub  Gemfile
+      append  Rakefile
+      create  solr
+      create  solr/conf/_rest_managed.json
+      create  solr/conf/admin-extra.html
+      create  solr/conf/elevate.xml
+      create  solr/conf/mapping-ISOLatin1Accent.txt
+      create  solr/conf/protwords.txt
+      create  solr/conf/schema.xml
+      create  solr/conf/scripts.conf
+      create  solr/conf/solrconfig.xml
+      create  solr/conf/spellings.txt
+      create  solr/conf/stopwords.txt
+      create  solr/conf/stopwords_en.txt
+      create  solr/conf/synonyms.txt
+      create  solr/conf/xslt/example.xsl
+      create  solr/conf/xslt/example_atom.xsl
+      create  solr/conf/xslt/example_rss.xsl
+      create  solr/conf/xslt/luke.xsl
+      create  .solr_wrapper.yml
+     gemfile  rsolr (>= 1.0, < 3)
+         run  bundle install from "."
+Fetching gem metadata from https://rubygems.org/........
+Resolving dependencies...
+Bundle complete! 17 Gemfile dependencies, 106 gems now installed.
+Use `bundle info [gemname]` to see where a bundled gem is installed.
+    generate  blacklight:assets
+       rails  generate blacklight:assets
+    generate  blacklight:assets:importmap
+       rails  generate blacklight:assets:importmap --bootstrap-version='\~\>\ 5.1'
+     gemfile  bootstrap (\~\>\ 5.1)
+      append  config/importmap.rb
+      append  app/assets/config/manifest.js
+      append  app/javascript/application.js
+     gemfile  sassc-rails (~> 2.1)
+      create  app/assets/stylesheets/blacklight.scss
+         run  bundle install from "."
+Fetching gem metadata from https://rubygems.org/........
+Resolving dependencies...
+Fetching popper_js 2.11.8
+Installing popper_js 2.11.8
+Fetching bootstrap 5.3.1
+Installing bootstrap 5.3.1
+Bundle complete! 19 Gemfile dependencies, 113 gems now installed.
+Use `bundle info [gemname]` to see where a bundled gem is installed.
+    generate  blacklight:document
+       rails  generate blacklight:document solr_document
+      create  app/models/solr_document.rb
+    generate  blacklight:search_builder
+       rails  generate blacklight:search_builder search_builder
+      create  app/models/search_builder.rb
+    generate  blacklight:models
+       rails  generate blacklight:models
+      create  config/blacklight.yml
+        gsub  config/blacklight.yml
+        rake  blacklight:install:migrations
+Copied migration 20231012195932_create_searches.blacklight.rb from blacklight
+Copied migration 20231012195933_create_bookmarks.blacklight.rb from blacklight
+Copied migration 20231012195934_add_polymorphic_type_to_bookmarks.blacklight.rb from blacklight
+       route
+                concern :exportable, Blacklight::Routes::Exportable.new
+
+                resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
+                  concerns :exportable
+                end
+
+                resources :bookmarks do
+                  concerns :exportable
+
+                  collection do
+                    delete 'clear'
+                  end
+                end
+    generate  blacklight:user
+       rails  generate blacklight:user user
+     warning  Blacklight authenticated user functionality not installed, as a user model
+              could not be found at /app/models/user.rb. If you used a different name,
+              please re-run the migration and provide that name as an argument. E.g.:
+
+                `rails -g blacklight:user client`
+    generate  blacklight:controller
+       rails  generate blacklight:controller catalog
+      insert  app/controllers/application_controller.rb
+      create  app/controllers/catalog_controller.rb
+       route    concern :searchable, Blacklight::Routes::Searchable.new
+
+                resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
+                  concerns :searchable
+                end
+       route  root to: "catalog#index"
+      create  config/locales/blacklight.en.yml
+       route  mount Blacklight::Engine => '/'
