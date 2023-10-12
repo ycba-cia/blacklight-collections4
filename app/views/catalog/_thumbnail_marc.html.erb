@@ -1,0 +1,12 @@
+<div class="row">
+
+    <div class="col-xs-12 col-sm-4">
+      <% error_img = path_to_image('not_available1.png')  %>
+      <% if document['isbn_ss'] %>
+        <%= image_tag( "/bookcover/isbn/#{document['isbn_ss'][0]}/size/medium", class: 'ycba-thumbnail', alt: document['title_txt'], onerror: "this.src='#{error_img}';" ) %>
+      <% elsif document['manifest_thumbnail_ss'] %>
+          <%= image_tag document['manifest_thumbnail_ss'][0], class: 'ycba-thumbnail', alt: document['title_txt'], onerror: "this.src='#{error_img}';"  %>
+      <% else %>
+        <%= image_tag "#{error_img}", class: 'ycba-thumbnail', alt: "No cover image available" %>
+      <% end %>
+    </div>

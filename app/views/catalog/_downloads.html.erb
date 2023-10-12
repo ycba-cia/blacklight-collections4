@@ -1,0 +1,108 @@
+<% downloads,restricted = get_download_array_from_manifest %>
+
+<div id="ycba-downloads" class="btn btn-primary col-xs-3" align="center" onclick="select_one_dl(<%= downloads %>,'<%= document["id"] %>',<%= document.to_json %>)">
+  <% if restricted %>
+    <%= link_to("Print selected image","#downloadModal", data: {toggle: "modal"}, style: "color: white;" ) %>
+  <% else %>
+    <%= link_to("Download/Print selected image","#downloadModal", data: {toggle: "modal"}, style: "color: white;" ) %>
+  <% end %>
+</div>
+<div class="modal fade" id="downloadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <% if restricted %>
+          <h4 class="modal-title" id="myModalLabel">Print Selected Image</h4>
+        <% else %>
+          <h4 class="modal-title" id="myModalLabel">Download/Print Selected Image</h4>
+        <% end %>
+      </div>
+      <div id="download-details" class="modal-body">
+        <!--jquery content here-->
+        <div class="row">
+          <div class="col-xs-12">
+            <% if document["rightsURL_ss"] && document["rightsURL_ss"][0].to_s.include?("rightsstatements.org/vocab/UND/1.0/") %>
+              <a target="_blank" href="https://rightsstatements.org/vocab/UND/1.0/">
+                <img width="135px;" src='https://rightsstatements.org/files/buttons/UND.dark-white-interior-blue-type.png' class='img-responsive' alt='Copyright Undetermined' title='Copyright Undetermined'>
+              </a>
+            <% end %>
+            <% if document["rightsURL_ss"] && document["rightsURL_ss"][0].to_s.include?("creativecommons.org/publicdomain/zero/1.0/") %>
+              <a target="_blank" href="https://creativecommons.org/publicdomain/zero/1.0/">
+                <img width="135px;" src='https://mirrors.creativecommons.org/presskit/buttons/88x31/png/cc-zero.png' class='img-responsive' alt='Public Domain' title='Public Domain'>
+              </a>
+            <% end %>
+            <% if document["rightsURL_ss"] && document["rightsURL_ss"][0].to_s.include?("rightsstatements.org/vocab/InC/1.0/") %>
+              <a target="_blank" href="https://rightsstatements.org/vocab/InC/1.0/">
+                <img width="135px;"src='https://rightsstatements.org/files/buttons/InC.dark-white-interior-blue-type.png' class='img-responsive' alt='In Copyright' title='In Copyright'>
+              </a>
+            <% end %>
+            <% if document["rightsURL_ss"] && document["rightsURL_ss"][0].to_s.include?("rightsstatements.org/vocab/CNE/1.0/") %>
+              <a target="_blank" href="http://rightsstatements.org/vocab/CNE/1.0/">
+                <img width="135px;" src='https://rightsstatements.org/files/buttons/CNE.dark-white-interior-blue-type.png' class='img-responsive' alt='Copyright Undetermined' title='Copyright Undetermined'>
+              </a>
+            <% end %>
+            <% if document["rightsURL_ss"] && document["rightsURL_ss"][0].to_s.include?("https://rightsstatements.org/vocab/NoC-CR/1.0/") %>
+              <a target="_blank" href="https://rightsstatements.org/vocab/NoC-CR/1.0/">
+                <img width="135px;" src='https://rightsstatements.org/files/buttons/NoC-CR.dark-white-interior-blue-type.png' class='img-responsive' alt='Contractual Restrictions' title='Contractual Restrictions'>
+              </a>
+            <% end %>
+          </div>
+        </div>
+        <% if document["rightsURL_ss"] && document["rightsURL_ss"][0].to_s.include?("rightsstatements.org/vocab/InC/1.0/") %>
+          <div class="row">
+            <div class="col-xs-12"><%= document["ort_ss"][0].to_s %></div>
+          </div>
+        <% end %>
+        </br>
+        <div id="selected-image-index"></div>
+        <div class="row">
+          <div id="dlselect-info" class="col-xs-12"></div>
+        </div>
+        </br>
+        <% unless restricted %>
+          <div class="row">
+            <div id="jpeg-container" class="col-xs-1">
+              <button id="jpeg-dl-button" type="button" class="btn btn-primary btn-sm" disabled>JPEG</button>
+            </div>
+            <div id="jpeg-dl-info" class="col-xs-11"></div><!--deprecated-->
+          </div>
+          </br>
+          <div class="row">
+            <div id="tiff-container" class="col-xs-1">
+              <button id="tiff-dl-button" type="button" class="btn btn-primary btn-sm" disabled>TIFF</button>
+            </div>
+            <div id="tiff-dl-info" class="col-xs-11"></div><!--deprecated-->
+          </div>
+          </br>
+        <% end %>
+        <div class="row">
+          <div id="print-container" class="col-xs-1">
+            <button id="print-button" type="button" class="btn btn-primary btn-sm" disabled>Print</button>
+          </div>
+          <div id="print-info-space" class="col-xs-1"> </div>
+          <div id="print-container-all" class="col-xs-1">
+            <button id="print-button-all" type="button" class="btn btn-primary btn-sm" disabled>Print All</button>
+          </div>
+          <div id="print-info" class="col-xs-9"></div><!--deprecated-->
+        </div>
+        </br>
+        <div class="row">
+          <div id="caption-container" style="text-decoration: underline;" class="col-xs-5" onclick="copy_to_clipboard()">
+            <!--<button id="caption-dl-button" type="button" class="btn btn-primary btn-sm">Caption</button>-->
+            Copy Caption to clipboard
+          </div>
+        </div>
+        </br>
+        <div id="caption-row" class="row">
+          <div id="caption-dl-info" class="col-xs-12 text-left">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <!--<button type="button" class="btn btn-primary">Submit</button>-->
+      </div>
+    </div>
+  </div>
+</div>

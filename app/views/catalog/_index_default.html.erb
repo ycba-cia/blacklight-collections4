@@ -1,0 +1,25 @@
+<%# default partial to display solr document fields in catalog index view -%>
+<div  class="col-xs-12 col-sm-8">
+<!--note: removing document-metadata creates desired justification"-->
+<!--<dl class="document-metadata dl-horizontal dl-invert">-->
+<dl class="dl-horizontal dl-invert">
+
+  <% index_fields(document).each do |field_name, field| -%>
+      <% if should_render_index_field? document, field %>
+          <dt class="blacklight-<%= field_name.parameterize %>"><%= render_index_field_label document, field: field_name %></dt>
+          <dd class="blacklight-<%= field_name.parameterize %>"><%= field_value document, field_name %></dd>
+      <% end -%>
+  <% end -%>
+  <% if document.to_h["detailed_onview_ss"] %>
+    <% if document["detailed_onview_ss"][0] == "On view at the Yale University Art Gallery" %>
+      <dt class="blacklight-<%= "detailed_onview_ss".parameterize %>">On View:</dt>
+      <dd class="blacklight-<%= "detailed_onview_ss".parameterize %>">On view at YUAG</dd>
+    <% elsif document["detailed_onview_ss"][0] == "Not on view" %>
+      <dt class="blacklight-<%= "detailed_onview_ss".parameterize %>">On View:</dt>
+      <dd class="blacklight-<%= "detailed_onview_ss".parameterize %>">Not on view</dd>
+    <% end %>
+  <% end %>
+
+</dl>
+</div>
+</div>

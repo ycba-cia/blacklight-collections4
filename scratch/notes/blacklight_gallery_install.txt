@@ -1,0 +1,22 @@
+MWC02Y20P1JHD5:blacklight-collections4 ermadmix$ rails g blacklight_gallery:install
+      insert  app/controllers/catalog_controller.rb
+      insert  app/models/solr_document.rb
+     gemfile  openseadragon (>= 0.2.0)
+[DEPRECATED] `Bundler.with_clean_env` has been deprecated in favor of `Bundler.with_unbundled_env`. If you instead want the environment before bundler was originally loaded, use `Bundler.with_original_env` (called at /Users/ermadmix/.rvm/gems/ruby-3.2.2@ycba/gems/blacklight-gallery-4.4.0/lib/generators/blacklight_gallery/install_generator.rb:26)
+         run  bundle install from "."
+Fetching gem metadata from https://rubygems.org/........
+Resolving dependencies...
+Bundle complete! 22 Gemfile dependencies, 117 gems now installed.
+Use `bundle info [gemname]` to see where a bundled gem is installed.
+    generate  openseadragon:install
+       rails  generate openseadragon:install
+      create  app/assets/stylesheets/openseadragon.css
+   identical  app/assets/javascripts/openseadragon.js
+      append  app/assets/config/manifest.js
+      insert  app/controllers/application_controller.rb
+      create  app/assets/stylesheets/blacklight_gallery.css.scss
+      append  app/assets/config/manifest.js
+    conflict  app/assets/javascripts/blacklight_gallery.js
+Overwrite /Users/ermadmix/Documents/RubymineProjects/blacklight-collections4/app/assets/javascripts/blacklight_gallery.js? (enter "h" for help) [Ynaqdhm] y
+       force  app/assets/javascripts/blacklight_gallery.js
+      insert  app/assets/javascripts/application.js

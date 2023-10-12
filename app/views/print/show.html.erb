@@ -1,0 +1,55 @@
+<meta name="robots" content="noindex">
+<style type="text/css" media="print">
+  .printbutton {
+    visibility: hidden;
+    display: none;
+  }
+</style>
+<style type="text/css">
+  .printlido {
+    //font-family: "Mallory Standard Webfont Normal";
+    font-size: 12px;
+    width: 740px;
+  }
+
+  .printlido dl {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .printlido dt {
+    text-align: right;
+    width: 20%;
+    margin-bottom: 8px;
+  }
+
+  .printlido dd {
+    margin-left: auto;
+    width: 78%;
+    margin-bottom: 8px;
+  }
+</style>
+<input type='button' onClick='window.print()' class='printbutton' value='Print This Page'/>
+&nbsp;
+<input type='button' onClick="location.href='/catalog/<%= @id %>'" class='printbutton' value='Go back'/>
+<header>
+  <div id="header-row" class="row fixer">
+    <span class="div-horizontal">
+    <span id="large-banner" class="col-xs-5" style="padding-left:7%;">
+        <a href="/"><%= show_svg('logo-horizontal.svg') %></a>
+      </span>
+    </span>
+  </div>
+</header>
+<% if @size == "0" %>
+  </br>
+  </br>
+  </br>
+  </br>
+<%end %>
+<%= print_images(@id,@index) %>
+<div class="printlido col-xs-5">
+  <dl class="dl-vertical dl-invert">
+    <%= @item_data.html_safe %>
+  </dl>
+</div>
+
