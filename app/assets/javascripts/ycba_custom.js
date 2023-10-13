@@ -64,8 +64,8 @@ $(document).on("turbolinks:load",function() {
     //set h1 with title from head
     $("h1").text($("head title").text());
 
-    var $item = $('.item');
-    var $numberofSlides = $('.item').length;
+    var $item = $('.carousel-item');
+    var $numberofSlides = $('.carousel-item').length;
     var $currentSlide = Math.floor((Math.random() * $numberofSlides));
 
     $('.carousel-indicators li').each(function(){
@@ -79,11 +79,13 @@ $(document).on("turbolinks:load",function() {
         }
     });
 
-    $('.iiifpopover').popover({
+    //$('#facet-panel-collapse').removeClass("collapse")//new
+
+    /*$('.iiifpopover').popover({
         html : true,
         content: function() {
             return $('#iiifpopover_content_wrapper').html();
         }
-    });
+    });*/
 
 });
