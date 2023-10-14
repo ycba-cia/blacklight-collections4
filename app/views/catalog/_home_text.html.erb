@@ -1,7 +1,7 @@
 <div>
   <!--<p>Enter an item to search, and/or use the facets.</p>-->
   <!--<img id="splash-image" alt="Home Page Image" src="assets/ba-arc-20160328-2003-dsp.jpg"/>-->
-  <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0" data-controller="random_image”>
     <!-- Indicators -->
 
     <!-- Wrapper for slides -->
@@ -102,4 +102,29 @@
       <span class="glyphicon glyphicon-chevron-right" style="opacity: 1;color: black;"></span>
     </button>
   </div>
+
+<script type="text/javascript" src="https://ga.jspm.io/npm:jquery@3.7.1/dist/jquery.js"></script>
+<script type="text/javascript">
+    console.log("ol turbo!!");
+    document.querySelector.innerHTML = document.querySelector("head title").text;
+    var $items = document.querySelectorAll('.carousel-item');
+    var $numberofSlides = document.querySelectorAll('.carousel-item').length;
+    var $currentSlide = Math.floor((Math.random() * $numberofSlides));
+    console.log("CurrentSlide:"+$currentSlide);
+    var $divs = document.querySelectorAll('.carousel-indicators li');
+    for (i = 0; i < $divs.length; ++i) {
+        var $slideValue = $divs[i].getAttribute('data-slide-to');
+        console.log("SlideValue:"+$slideValue);
+        if($currentSlide == $slideValue) {
+            console.log("Add:"+$divs[i]);
+            $divs[i].className +=('active');
+            $items[$slideValue].className +=('active');
+        } else {
+            //console.log("Remove:"+$divs[i]);
+            //if($divs[i])
+            //$divs[i].classlist.remove('active');
+            //$items[$slideValue].classlist.remove('active');
+        }
+    };
+</script>
 </div>

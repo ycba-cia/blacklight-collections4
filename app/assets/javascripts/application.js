@@ -12,8 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-// require turbolinks
-//= require bootstrap/carousel
+// require turbolinks //to be replaced by turbo-rails
+// require bootstrap/carousel //facet links work without this
 //= require bootstrap-sprockets
 // Required by Blacklight
 //= require blacklight/blacklight

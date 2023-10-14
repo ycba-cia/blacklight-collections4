@@ -1,0 +1,9 @@
+rails generate blacklight_range_limit:install
+    generate  blacklight_range_limit:assets
+       rails  generate blacklight_range_limit:assets
+File unchanged! Either the supplied flag value not found or the content has already been inserted!  app/assets/stylesheets/application.scss
+File unchanged! Either the supplied flag value not found or the content has already been inserted!  app/assets/javascripts/application.js
+      insert  app/controllers/catalog_controller.rb
+      insert  app/models/search_builder.rb
+       route  concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
+      insert  config/routes.rb

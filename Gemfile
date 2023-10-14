@@ -9,7 +9,7 @@ gem 'blacklight', '~> 8.0', '>= 8.0.1'
 gem 'blacklight_range_limit', '~> 8.3'
 gem 'blacklight-gallery', '~> 4.3'
 gem 'jquery-rails', '~> 4.6'
-gem 'turbolinks', '~> 5.2', '>= 5.2.1'
+#gem 'turbolinks', '~> 5.2', '>= 5.2.1' # to be replaced by turbo-rails
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
