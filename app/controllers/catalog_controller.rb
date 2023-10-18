@@ -383,4 +383,51 @@ class CatalogController < ApplicationController
     # default 'mySuggester', uncomment and provide it below
     # config.autocomplete_suggester = 'mySuggester'
   end
+
+  def display_marc_field?(context, doc)
+    doc['recordtype_ss'] and doc['recordtype_ss'][0].to_s == 'marc'
+  end
+
+  def display_lido_field?(context, doc)
+    doc['recordtype_ss'] and doc['recordtype_ss'][0].to_s == 'lido'
+  end
+
+  def display_marc_accessor_field?(context, doc)
+    #NOTE: good diagnostic
+    #puts "#{context.accessor} ****> #{doc.send(context.accessor)}"
+    display_marc_field?(context, doc) and !context.accessor.nil? and !doc.send(context.accessor).nil?
+  end
+
+  def display_lido_accessor_field?(context, doc)
+    #NOTE: good diagnostic
+    #puts "#{context.accessor} ****> #{doc.send(context.accessor)}"
+    display_lido_field?(context, doc) and !context.accessor.nil? and !doc.send(context.accessor).nil?
+  end
+
+  def render_related_content?(context,doc)
+    return false if display_marc_field?(context, doc) == false
+    return false if doc['resourceURL_ss'].nil?
+    text_to_suppress = "View a digitized version"
+    text_to_suppress2 = "View a selection of digital images in the Yale Center for British"
+    links = []
+    doc['resourceURL_ss'].each {  |item|
+      text, url = item.split("\n")
+      return false if text.start_with?(text_to_suppress)
+      return false if text.start_with?(text_to_suppress2)
+    }
+    #NOTE: good diagnostic
+    #puts "RELATED:#{doc['resourceURL_ss']}"
+    #puts "CONTEXT:#{context.inspect}"
+    true
+  end
+
+  def isLidoLoan?(context,doc)
+    #puts context
+    #puts doc
+    if doc[:callnumber_ss] && doc[:callnumber_ss][0].start_with?("L") && display_lido_field?(context,doc)
+      return true
+    else
+      return false
+    end
+  end
 end
