@@ -1,0 +1,23 @@
+<% component = Blacklight::VERSION > '8' ?
+                   Blacklight::DocumentComponent.new(classes: 'col', component: :div, document: @presenter, counter: @counter) :
+                   Blacklight::DocumentComponent.new(classes: 'col', component: :div, document: @document, presenter: @presenter, counter: @counter)
+%>
+<% puts "OVERRIDE:#{@presenter&.view_config}" %>
+<%= render(component) do |component| %>
+  <% component.with_body do %>
+    <div class="thumbnail-container">
+      <%= thumbnail %>
+
+      <div class="caption-area">
+        <div class="caption container">
+          <%= title %>
+          <%= content %>
+          <%= metadata %>
+          <% metadata_sections.each do |section| %>
+            <%= section %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

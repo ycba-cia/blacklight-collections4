@@ -39,10 +39,22 @@ class CatalogController < ApplicationController
 
   configure_blacklight do |config|
     config.view.gallery(document_component: Blacklight::Gallery::DocumentComponent, icon: Blacklight::Gallery::Icons::GalleryComponent)
-    config.view.masonry(document_component: Blacklight::Gallery::DocumentComponent, icon: Blacklight::Gallery::Icons::MasonryComponent)
+    config.view.masonry(document_component: Blacklight::Gallery::MasonryComponent,
+                        icon: Blacklight::Gallery::Icons::MasonryComponent,
+                        title_component: Blacklight::DocumentTitleComponent,
+                        metadata_component: Blacklight::DocumentMetadataComponent,
+                        thumbnail_component: Blacklight::Document::ThumbnailComponent)
+
     config.view.slideshow(document_component: Blacklight::Gallery::SlideshowComponent, icon: Blacklight::Gallery::Icons::SlideshowComponent)
     config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
     config.show.partials.insert(1, :openseadragon)
+
+    #not needed as using viewComponents rather than partials
+    #config.view.masonry.partials = [:compact_index]
+    #config.view.masonry.default = true
+    #config.view.masonry.icon_class = 'glyphicon-th'
+
+    config.index.thumbnail_method = :thumb
     ## Specify the style of markup to be generated (may be 4 or 5)
     # config.bootstrap_version = 5
     #
