@@ -41,7 +41,7 @@ class CatalogController < ApplicationController
     config.view.gallery(document_component: Blacklight::Gallery::DocumentComponent, icon: Blacklight::Gallery::Icons::GalleryComponent)
     config.view.masonry(document_component: Blacklight::Gallery::MasonryComponent,
                         icon: Blacklight::Gallery::Icons::MasonryComponent,
-                        title_component: Blacklight::DocumentTitleComponent,
+                        title_component: Blacklight::MasonryTitleComponent,
                         metadata_component: Blacklight::DocumentMetadataComponent,
                         thumbnail_component: Blacklight::Document::ThumbnailComponent)
 
