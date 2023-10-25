@@ -42,8 +42,8 @@ class CatalogController < ApplicationController
     config.view.masonry(document_component: Blacklight::Gallery::MasonryComponent,
                         icon: Blacklight::Gallery::Icons::MasonryComponent,
                         title_component: Blacklight::MasonryTitleComponent,
-                        metadata_component: Blacklight::DocumentMetadataComponent,
-                        thumbnail_component: Blacklight::Document::ThumbnailComponent)
+                        metadata_component: Blacklight::MasonryMetadataComponent,
+                        thumbnail_component: Blacklight::Document::MasonryThumbnailComponent)
 
     config.view.slideshow(document_component: Blacklight::Gallery::SlideshowComponent, icon: Blacklight::Gallery::Icons::SlideshowComponent)
     config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
