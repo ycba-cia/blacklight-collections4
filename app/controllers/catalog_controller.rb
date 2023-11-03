@@ -37,6 +37,7 @@ class CatalogController < ApplicationController
   #
   # rescue_from Blacklight::Exceptions::InvalidRequest, with: :my_handling_method
 
+  #ERJ 11/02/2023 https://github.com/projectblacklight/blacklight/blob/main/lib/blacklight/configuration.rb
   configure_blacklight do |config|
     config.view.gallery(document_component: Blacklight::Gallery::DocumentComponent, icon: Blacklight::Gallery::Icons::GalleryComponent)
     config.view.masonry(document_component: Blacklight::Gallery::MasonryComponent,

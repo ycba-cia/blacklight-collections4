@@ -79,10 +79,10 @@ render document_component.new(presenter: document_presenter(document), component
   # @return [String]
   def render_document_index_with_view view, documents, locals = {}
     view_config = blacklight_config&.view_config(view)
-    #ERJ below
-    puts "VIEW:#{view}"
-    puts "VIEW_CONFIG:#{view_config}"
-    puts "TEMPLATE:#{view_config.template}"
+    #ERJ 11/3/2023 2 lines below for debugging
+    #puts "VIEW:#{view}"
+    #puts "VIEW_CONFIG:#{view_config}"
+
     return render partial: view_config.template, locals: locals.merge(documents: documents, view_config: view_config) if view_config&.template
 
     template = cached_view ['index', view].join('_') do
@@ -188,7 +188,6 @@ render document_component.new(presenter: document_presenter(document), component
       logger&.debug "Looking for document index partial #{partial}"
       prefixes = lookup_context.prefixes + [prefix, ""].compact
       template = lookup_context.find_all(name, prefixes, true, locals.keys + [:documents], {}).first
-      puts "TEMPLATE2:#{template.inspect}"
       return template if template
     end
     nil
