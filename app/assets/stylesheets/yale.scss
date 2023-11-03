@@ -940,6 +940,9 @@ h6, .h6, .documents-masonry .document .index_title, .documents-gallery .index_ti
   color: #ffffff; //Not displaying title
 }
 
+.documents-masonry .document .document-metadata dt, .documents-masonry .document .document-metadata dd {
+  font-size: .8rem;
+}
 .blacklight-title_short_ss {
-   font-weight: bold;
+  font-weight: bold;
 }

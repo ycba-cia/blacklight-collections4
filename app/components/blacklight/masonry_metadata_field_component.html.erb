@@ -3,8 +3,6 @@
     <%= label %>
   <% end %>
   <% component.with_value do %>
-    <% logger&.debug "VALUES: #{@field.document[:recordtype_ss]}" %>
-    <% logger&.debug "VALUES: #{@field.render}" %>
     <% if @field.render == "On view at the Yale University Art Gallery" %>
       <%= "On view at YUAG" %>
     <% else %>
