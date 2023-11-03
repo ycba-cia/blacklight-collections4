@@ -937,5 +937,9 @@ h6, .h6, .documents-masonry .document .index_title, .documents-gallery .index_ti
 
 .index_title, #content a {
   //color: #0066cc; blue
-    color: #ffffff;
+  color: #ffffff; //Not displaying title
+}
+
+.blacklight-title_short_ss {
+   font-weight: bold;
 }

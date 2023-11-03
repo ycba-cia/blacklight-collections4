@@ -4,7 +4,7 @@ module Blacklight
   class MasonryMetadataComponent < Blacklight::Component
     renders_many :fields, (lambda do |component: nil, **kwargs|
       #ERJ 11/3/2023 added layout: Blacklight::MasonryMetadataFieldLayoutComponent on next line
-      component.new(**kwargs, layout: Blacklight::MasonryMetadataFieldLayoutComponent)
+      MasonryMetadataFieldComponent.new(**kwargs, layout: Blacklight::MasonryMetadataFieldLayoutComponent)
     end)
     with_collection_parameter :fields
 
