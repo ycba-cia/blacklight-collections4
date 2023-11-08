@@ -1,0 +1,12 @@
+<%= render(@layout.new(field: @field)) do |component| %>
+  <% component.with_label do %>
+    <%= label %>
+  <% end %>
+  <% component.with_value do %>
+    <% if @field.render == "On view at the Yale University Art Gallery" %>
+      <%= "On view at YUAG" %>
+    <% else %>
+      <%= @field.render %>
+    <% end %>
+  <% end %>
+<% end %>

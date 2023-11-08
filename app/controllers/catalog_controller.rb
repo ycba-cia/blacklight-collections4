@@ -39,7 +39,9 @@ class CatalogController < ApplicationController
 
   #ERJ 11/02/2023 https://github.com/projectblacklight/blacklight/blob/main/lib/blacklight/configuration.rb
   configure_blacklight do |config|
-    config.view.gallery(document_component: Blacklight::Gallery::DocumentComponent, icon: Blacklight::Gallery::Icons::GalleryComponent)
+    config.view.gallery(document_component: Blacklight::Gallery::DocumentComponent,
+                        icon: Blacklight::Gallery::Icons::GalleryComponent,
+                        metadata_component: Blacklight::GalleryMetadataComponent)
     config.view.masonry(document_component: Blacklight::Gallery::MasonryComponent,
                         icon: Blacklight::Gallery::Icons::MasonryComponent,
                         title_component: Blacklight::MasonryTitleComponent,
