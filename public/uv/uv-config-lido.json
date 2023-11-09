@@ -1,0 +1,20 @@
+{
+    "options": {
+        "rightPanelEnabled": true
+    },
+    "modules": {
+        "footerPanel": {
+            "options": {
+                "downloadEnabled": false,
+                "fullscreenEnabled": true,
+                "shareEnabled": false
+            }
+        },
+        "contentLeftPanel": {
+            "options": {
+                "panelOpen": false
+            }
+        }
+
+      }
+}
