@@ -204,7 +204,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'author_ss', :label => 'Creator', if: :display_lido_field?
     config.add_index_field 'loc_naf_author_ss', :label => 'Creator', if: :display_marc_field?
     config.add_index_field 'title_short_ss', label: "Title"
-    config.add_index_field 'publish_date_ss', :label => 'Publish Date'
+    config.add_index_field 'publishDate_ss', :label => 'Publish Date'
     config.add_index_field 'detailed_onview_ss', :label => 'On View', if: :display_lido_field?
 
     # solr fields to be displayed in the show (single result) view
