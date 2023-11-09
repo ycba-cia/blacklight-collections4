@@ -51,6 +51,7 @@ class CatalogController < ApplicationController
     config.view.slideshow(document_component: Blacklight::Gallery::SlideshowComponent, icon: Blacklight::Gallery::Icons::SlideshowComponent)
     config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
     config.show.partials.insert(1, :openseadragon)
+    config.show.document_component = Blacklight::ShowpageDocumentComponent
 
     #not needed as using viewComponents rather than partials
     #config.view.masonry.partials = [:compact_index]

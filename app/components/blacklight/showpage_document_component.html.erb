@@ -1,0 +1,22 @@
+<!--
+ERJ 11/9/2023 flavor of the following class
+https://github.com/projectblacklight/blacklight/blob/v8.1.0/app/components/blacklight/document_component.html.erb
+
+-->
+<%= content_tag @component,
+                id: @id,
+                data: {
+                    'document-id': @document.id.to_s.parameterize,
+                    'document-counter': @counter,
+                },
+                itemscope: true,
+                itemtype: @document.itemtype,
+                class: classes.flatten.join(' ') do %>
+  <div class="document-main-section">
+    <%= header %>
+    <%= image %>
+    <%= no_image %>
+    <%= metadata %>
+    <%= tabs %>
+  </div>
+<% end %>
