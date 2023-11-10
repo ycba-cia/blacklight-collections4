@@ -30,15 +30,19 @@ module Blacklight
     COLLECTION_INDEX_OFFSET = ViewComponent::VERSION::MAJOR < 3 ? 0 : 1
 
     renders_one :header, (lambda do
-        content_tag :h3, "Learning Viewcomponents"
+      content_tag :h3, "Learning Viewcomponents"
     end)
 
-    renders_one :image
-
+    renders_one :image, (lambda do
+      component = @presenter&.view_config&.image_component || Blacklight::ShowpageImageComponent
+      component.new(document: @presenter&.document)
+  end)
     renders_one :no_image
 
     renders_one :metadata, (lambda do
-      content_tag :p, @presenter&.view_config
+      #content_tag :p, @presenter&.view_config
+      content_tag :p, @presenter&.document[:institution_ss]
+
     end)
 
     renders_one :tabs
