@@ -39,10 +39,12 @@ module Blacklight
   end)
     renders_one :no_image
 
-    renders_one :metadata, (lambda do
-      #content_tag :p, @presenter&.view_config
-      content_tag :p, @presenter&.document[:institution_ss]
+    renders_one :metadata, (lambda do |static_content = nil, *args, component: nil, fields: nil, **kwargs|
+      next static_content if static_content.present?
 
+      component ||= @presenter&.view_config&.metadata_component || Blacklight::DocumentMetadataComponent
+
+      component.new(*args, fields: fields || @presenter&.field_presenters || [], **kwargs)
     end)
 
     renders_one :tabs
