@@ -1,7 +1,23 @@
 <script type="application/ld+json">
   <%= jsonld %>
 </script>
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+  .bs-example{
+    margin: 100px;
+  }
+</style>
+<script>
+    $(document).ready(function(){
+        $("#iiifpopover").popover({
+            container: 'body',
+            html: true,
+            content: function() { return $("#iiifpopover_content_wrapper").html();}
+        });
+    });
+</script>
 <% if document[:callnumber_ss] && document[:callnumber_ss][0].start_with?("L")  %>
   <div id="loan-header" align="left"><h3>On loan to the Yale Center for British Art</h3></div>
 <% end %>
@@ -28,19 +44,20 @@
     </div>
   </div>
 
-  <div class="row">
+  <!--<div class="btn-group row">-->
+  <div style="display: flex; flex-direction: row;"">
     <div class="col-xs-1">&nbsp;</div>
-    <div id="ycba-downloads-container" align="center">
+    <div id="ycba-downloads-container">
       <%= render partial: "downloads", locals: {document: document} %>
     </div>
     <% unless document["collection_ss"][0] == "Reference Library" %>
-      <div id="ycba-request-photography" class="btn btn-primary col-xs-3" align="center">
-        <%= link_to("Request additional photography", image_request_link(document), style: "color: white;", target: "_blank") %>
+      <div id="ycba-request-photography" class="btn btn-primary col-xs-3" align="center" style="width: fit-content;" >
+        <%= link_to("Request additional photography", image_request_link(document), style: "color: white; text-decoration: none;", target: "_blank") %>
       </div>
     <% end %>
 
-    <div id="ycba-thumbnail-controls" class="col-xs-2" align="center">
-      <a class="iiifpopover" data-placement="bottom" title="Image Interoperability Framework">
+    <div id="ycba-thumbnail-controls" class="col-xs-2" align="center" style="padding-inline-end: 20px;">
+      <a class="iiifpopover" data-bs-placement="bottom" title="Image Interoperability Framework" data-bs-toggle="popover" data-bs-content-id="iiifpopover_content_wrapper" id="iiifpopover">
         <img src="<%= path_to_image('logo-iiif.png') %>" class='img-responsive' alt='IIIF Actions' title='IIIF Actions' draggable></a>
       <div id="iiifpopover_content_wrapper" style="display: none;">
         <div>IIIF provides researchers rich metadata and media viewing options for comparison of works across cultural heritage collections. Visit the <a target="_blank" href="https://iiif.io">IIIF page</a> to learn more.</div>

@@ -2,9 +2,9 @@
 
 <div id="ycba-downloads" class="btn btn-primary col-xs-3" align="center" onclick="select_one_dl(<%= downloads %>,'<%= document["id"] %>',<%= document.to_json %>)">
   <% if restricted %>
-    <%= link_to("Print selected image","#downloadModal", data: {toggle: "modal"}, style: "color: white;" ) %>
+    <%= link_to("Print selected image","#downloadModal", data: {toggle: "modal"}, style: "color: white; text-decoration: none;" ) %>
   <% else %>
-    <%= link_to("Download/Print selected image","#downloadModal", data: {toggle: "modal"}, style: "color: white;" ) %>
+    <%= link_to("Download/Print selected image","#downloadModal", data: {toggle: "modal"}, style: "color: white; text-decoration: none;" ) %>
   <% end %>
 </div>
 <div class="modal fade" id="downloadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
