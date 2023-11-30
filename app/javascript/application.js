@@ -2,6 +2,6 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "jquery"
-import bootstrap from "bootstrap"
+import "bootstrap"
 import githubAutoCompleteElement from "@github/auto-complete-element"
 import Blacklight from "blacklight"
