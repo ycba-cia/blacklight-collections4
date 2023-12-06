@@ -789,14 +789,8 @@ i {
   right: auto;
   color: black;
 }
-.carousel-control {
-  color: black;
-}
-.carousel .carousel-indicators li {
-  border-color: black;
-}
-.carousel .carousel-indicators .active {
-  background-color: black;
+.carousel .carousel-indicators [data-bs-target]:hover {
+  background-color: black !important;
 }
 
 
