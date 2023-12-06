@@ -1,7 +1,7 @@
 <div>
   <!--<p>Enter an item to search, and/or use the facets.</p>-->
   <!--<img id="splash-image" alt="Home Page Image" src="assets/ba-arc-20160328-2003-dsp.jpg"/>-->
-  <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0" data-controller="random_image”>
+  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
     <!-- Indicators -->
 
     <!-- Wrapper for slides -->
@@ -81,44 +81,44 @@
 
     </div>
 
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" role="button"></li>
-      <li data-target="#myCarousel" data-slide-to="1" role="button"></li>
-      <li data-target="#myCarousel" data-slide-to="2" role="button"></li>
-      <li data-target="#myCarousel" data-slide-to="3" role="button"></li>
-      <li data-target="#myCarousel" data-slide-to="4" role="button"></li>
-      <li data-target="#myCarousel" data-slide-to="5" role="button"></li>
-      <li data-target="#myCarousel" data-slide-to="6" role="button"></li>
-      <li data-target="#myCarousel" data-slide-to="7" role="button"></li>
-      <li data-target="#myCarousel" data-slide-to="8" role="button"></li>
-      <li data-target="#myCarousel" data-slide-to="9" role="button"></li>
-    </ol>
+    <div class="carousel-indicators">
+      <button class="border border-dark" data-bs-target="#myCarousel" data-bs-slide-to="0"></button>
+      <button class="border border-dark" data-bs-target="#myCarousel" data-bs-slide-to="1"></button>
+      <button class="border border-dark" data-bs-target="#myCarousel" data-bs-slide-to="2"></button>
+      <button class="border border-dark" data-bs-target="#myCarousel" data-bs-slide-to="3"></button>
+      <button class="border border-dark" data-bs-target="#myCarousel" data-bs-slide-to="4"></button>
+      <button class="border border-dark" data-bs-target="#myCarousel" data-bs-slide-to="5"></button>
+      <button class="border border-dark" data-bs-target="#myCarousel" data-bs-slide-to="6"></button>
+      <button class="border border-dark" data-bs-target="#myCarousel" data-bs-slide-to="7"></button>
+      <button class="border border-dark" data-bs-target="#myCarousel" data-bs-slide-to="8"></button>
+      <button class="border border-dark" data-bs-target="#myCarousel" data-bs-slide-to="9"></button>
+    </div>
 
     <!-- Left and right controls -->
-    <button class="left carousel-control" href="#myCarousel" data-slide="prev" aria-label="Previous Slide">
-      <span class="glyphicon glyphicon-chevron-left" style="opacity: 1;color: black;"></span>
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
     </button>
-    <button class="right carousel-control" href="#myCarousel" data-slide="next" aria-label="Next Slide">
-      <span class="glyphicon glyphicon-chevron-right" style="opacity: 1;color: black;"></span>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
     </button>
   </div>
 
-<script type="text/javascript" src="https://ga.jspm.io/npm:jquery@3.7.1/dist/jquery.js"></script>
 <script type="text/javascript">
-    console.log("ol turbo!!");
+    console.log("inline javascript!!");
+    //import "bootstrap"; //this may work if script type="module"
     document.querySelector.innerHTML = document.querySelector("head title").text;
     var $items = document.querySelectorAll('.carousel-item');
     var $numberofSlides = document.querySelectorAll('.carousel-item').length;
     var $currentSlide = Math.floor((Math.random() * $numberofSlides));
     console.log("CurrentSlide:"+$currentSlide);
-    var $divs = document.querySelectorAll('.carousel-indicators li');
+    var $divs = document.querySelectorAll('.carousel-indicators button');
     for (i = 0; i < $divs.length; ++i) {
-        var $slideValue = $divs[i].getAttribute('data-slide-to');
+        var $slideValue = $divs[i].getAttribute('data-bs-slide-to');
         console.log("SlideValue:"+$slideValue);
         if($currentSlide == $slideValue) {
             console.log("Add:"+$divs[i]);
-            $divs[i].className +=('active');
-            $items[$slideValue].className +=('active');
+            $divs[i].classList.add("active");
+            $items[$slideValue].classList.add("active");
         } else {
             //console.log("Remove:"+$divs[i]);
             //if($divs[i])
