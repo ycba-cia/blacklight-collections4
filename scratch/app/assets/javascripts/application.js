@@ -10,19 +10,19 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
+// require jquery
+// require jquery_ujs
 // require turbolinks //to be replaced by turbo-rails
 // require bootstrap/carousel //facet links work without this
-//= require bootstrap-sprockets
+// require bootstrap-sprockets
 // Required by Blacklight
-//= require blacklight/blacklight
-//= require blacklight_gallery
+// require blacklight/blacklight
+// require blacklight_gallery
 // require jquery.fancybox.min
-//= require_tree .
+//= require_tree
 
 
 // For blacklight_range_limit built-in JS, if you don't want it you don't need
 // this:
-//= require 'blacklight_range_limit'
+// require 'blacklight_range_limit'
 

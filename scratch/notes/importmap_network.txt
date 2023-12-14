@@ -1,0 +1,31 @@
+<script type="importmap" data-turbo-track="reload">{
+      "imports": {
+        "application": "/assets/application-833f37867ecf64a6e7f69276da6cceafeada7fb0498be61fb74f45330f0f27ba.js",
+        "@hotwired/turbo-rails": "/assets/turbo.min-dfd93b3092d1d0ff56557294538d069bdbb28977d3987cb39bc0dd892f32fc57.js",
+        "@hotwired/stimulus": "/assets/stimulus.min-dd364f16ec9504dfb72672295637a1c8838773b01c0b441bd41008124c407894.js",
+        "@hotwired/stimulus-loading": "/assets/stimulus-loading-3576ce92b149ad5d6959438c6f291e2426c86df3b874c525b30faad51b0d96b3.js",
+        "@github/auto-complete-element": "https://cdn.skypack.dev/@github/auto-complete-element",
+        "jquery": "https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.js",
+        "@popperjs/core": "https://ga.jspm.io/npm:@popperjs/core@2.11.6/dist/umd/popper.min.js",
+        "bootstrap": "https://ga.jspm.io/npm:bootstrap@5.3.1/dist/js/bootstrap.js",
+        "blacklight/bookmark_toggle": "/assets/blacklight/bookmark_toggle-97b6e8357b4b80f49f7978d752d5b6e7e7f728fe9415742ab71b74418d689fad.js",
+        "blacklight/button_focus": "/assets/blacklight/button_focus-9e15a08a7a1886d78f54ed5d25655a8a07a535dcdd4de584da5c6c6d47e4188c.js",
+        "blacklight/checkbox_submit": "/assets/blacklight/checkbox_submit-7487e8aab30e3b1509ab58ee473b9a886d755332ade14642ecd98b4cff0c72ef.js",
+        "blacklight/core": "/assets/blacklight/core-65db34d8f13f026bcc00abf2dc79a6d61c981f588e6e43b8ea002108656b0ae2.js",
+        "blacklight": "/assets/blacklight/index-267e64c5525f71bbc998c7dcc67340a3a40ae3464988e067f0a65d7a8f5f58b3.js",
+        "blacklight/modal": "/assets/blacklight/modal-68610e6a319400c036afd544e8c05c9d5cf1b64c06ec2f06c0e94e3952366553.js",
+        "blacklight/modalForm": "/assets/blacklight/modalForm-02d8c117d37bf34110a491a76d0889980cb960ebfe1c1c2445e9de64e8637fee.js",
+        "blacklight/search_context": "/assets/blacklight/search_context-73898e17aacbe00701917cb30c8edf9f3294ca3fa857f99e393bde1000dc4984.js",
+        "blacklight_gallery/default": "/assets/blacklight_gallery/default-e51b6e1f3ee3e9ee7bf003e1db8ed8fc270f0929c71c4a502d64f040adb5b24d.js",
+        "blacklight_gallery/masonry": "/assets/blacklight_gallery/masonry-75dc474f4b29c4846c530e6cf85a8c2f9051e705897492eef0d24b2c89a84f63.js",
+        "blacklight_gallery/osd_viewer": "/assets/blacklight_gallery/osd_viewer-76c2b450bc025f4cb5e877e68dbb85fb689ce6d384d18ed26b5255cb2b67228c.js",
+        "blacklight_gallery/slideshow": "/assets/blacklight_gallery/slideshow-ccf2f34fbcfdbc600b241077bfa5e308c76a143a8cd0649e8e92753ab68af7bd.js",
+        "imagesloaded.min": "/assets/imagesloaded.min-69c7a8b298889a7db9215b169252177491a0181935e5ffe200f28e37551c58cd.js",
+        "masonry.min": "/assets/masonry.min-c748c8a377d2c43e3fa70819bf4e0a49c2f1a348d79709aefb3753cd4141c085.js",
+        "controllers/application": "/assets/controllers/application-368d98631bccbf2349e0d4f8269afb3fe9625118341966de054759d96ea86c7e.js",
+        "controllers/hello_controller": "/assets/controllers/hello_controller-549135e8e7c683a538c3d6d517339ba470fcfb79d62f738a0a089ba41851a554.js",
+        "controllers": "/assets/controllers/index-2db729dddcc5b979110e98de4b6720f83f91a123172e87281d5a58410fc43806.js",
+        "controllers/random_image_controller": "/assets/controllers/random_image_controller-080514dcd0878660ab9c1377c55911bced36cf986b00e35ef91a1093a806b315.js"
+      }
+    }</script>
+

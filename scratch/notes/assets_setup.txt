@@ -1,0 +1,32 @@
+source:
+https://github.com/projectblacklight/blacklight/blob/v8.1.0/lib/generators/blacklight/assets/importmap_generator.rb
+
+Gemfile
+gem "bootstrap", "\~\>\ 5.1" #5.3.1
+gem "sassc-rails", "~> 2.1" #2.1.2
+
+config/importmap.rb
+pin "@github/auto-complete-element", to: "https://cdn.skypack.dev/@github/auto-complete-element"
+pin "@popperjs/core", to: "https://ga.jspm.io/npm:@popperjs/core@2.11.6/dist/umd/popper.min.js"
+pin "bootstrap", to: "https://ga.jspm.io/npm:bootstrap@5.3.1/dist/js/bootstrap.js"
+
+app/assets/config/manifest.js
+//= link blacklight/manifest.js
+
+app/javascript/application.js
+import bootstrap from "bootstrap"
+import githubAutoCompleteElement from "@github/auto-complete-element"
+import Blacklight from "blacklight"
+
+app/assets/stylesheets/blacklight.scss
+@import 'bootstrap';
+@import 'blacklight/blacklight';
+
+"@github/auto-complete-element": "https://cdn.skypack.dev/@github/auto-complete-element",
+"@popperjs/core": "https://ga.jspm.io/npm:@popperjs/core@2.11.6/dist/umd/popper.min.js",
+"bootstrap": "https://ga.jspm.io/npm:bootstrap@5.3.1/dist/js/bootstrap.js",
+
+
+
+
+

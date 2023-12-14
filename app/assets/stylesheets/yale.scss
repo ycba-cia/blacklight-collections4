@@ -954,3 +954,37 @@ h6, .h6, .documents-masonry .document .index_title, .documents-gallery .index_ti
   background-color: #337ab7;
   border-color: #2e6da4;
 }
+
+.page-heading {
+  display:none;
+}
+
+.search-history .filter-values {
+  color: black;
+}
+
+.search-history .filter-name {
+  color: black !important;
+}
+
+.facet-limit-active {
+  //border-color: #198754 !important;//green
+  border-color: #337ab7 !important
+}
+.facet-limit-active .card-header {
+  background-color: #337ab7 !important;
+}
+.facet-limit-active .card-header .btn {
+  color: #000000;
+}
+.facet-values li .selected {
+  color: #000000 !important;
+}
+
+.btn-group > .btn,
+.btn-group-vertical > .btn {
+  //position: relative;
+  //flex: 1 1 auto;
+  white-space: normal;
+
+}

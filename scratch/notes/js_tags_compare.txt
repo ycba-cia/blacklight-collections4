@@ -1,0 +1,23 @@
+upgrade instance:
+<link rel="modulepreload" href="/assets/application-833f37867ecf64a6e7f69276da6cceafeada7fb0498be61fb74f45330f0f27ba.js">
+<link rel="modulepreload" href="/assets/turbo.min-dfd93b3092d1d0ff56557294538d069bdbb28977d3987cb39bc0dd892f32fc57.js">
+<link rel="modulepreload" href="/assets/stimulus.min-dd364f16ec9504dfb72672295637a1c8838773b01c0b441bd41008124c407894.js">
+<link rel="modulepreload" href="/assets/stimulus-loading-3576ce92b149ad5d6959438c6f291e2426c86df3b874c525b30faad51b0d96b3.js">
+<script src="/assets/es-module-shims.min-4ca9b3dd5e434131e3bb4b0c1d7dff3bfd4035672a5086deec6f73979a49be73.js" async="async" data-turbo-track="reload"></script>
+<script type="module">
+import "application"
+</script>
+
+833f3 has 6 lines of code - the imports from javascript/application.js
+
+out of box instance:
+<link rel="modulepreload" href="/assets/application-e930cd5eea7c7fb7d7732c67d3082d167b98fd627254991e2e488888c63633de.js">
+<link rel="modulepreload" href="/assets/turbo.min-dfd93b3092d1d0ff56557294538d069bdbb28977d3987cb39bc0dd892f32fc57.js">
+<link rel="modulepreload" href="/assets/stimulus.min-dd364f16ec9504dfb72672295637a1c8838773b01c0b441bd41008124c407894.js">
+<link rel="modulepreload" href="/assets/stimulus-loading-3576ce92b149ad5d6959438c6f291e2426c86df3b874c525b30faad51b0d96b3.js">
+<script src="/assets/es-module-shims.min-4ca9b3dd5e434131e3bb4b0c1d7dff3bfd4035672a5086deec6f73979a49be73.js" async="async" data-turbo-track="reload"></script>
+<script type="module">
+import "application"
+</script>
+
+e930c has 25947 lines of code - looks like coming from sprockets?
