@@ -11,13 +11,19 @@
   }
 </style>
 <script type="module">
-    import "bootstrap";
-    $(document).ready(function(){
-        $("#iiifpopover").popover({
-            container: 'body',
-            html: true,
-            content: function() { return $("#iiifpopover_content_wrapper").html();}
-        });
+    import bootstrap from "bootstrap"
+    var iiifpopover = document.getElementById("iiifpopover");
+
+    // Create a popover object with the same options as jQuery
+    var popover = new bootstrap.Popover(iiifpopover, {
+        container: "body",
+        html: true,
+        content: function() {
+            // Get the element with id "iiifpopover_content_wrapper"
+            var wrapper = document.getElementById("iiifpopover_content_wrapper");
+            // Return its inner HTML
+            return wrapper.innerHTML;
+        }
     });
 </script>
 <% if document[:callnumber_ss] && document[:callnumber_ss][0].start_with?("L")  %>
@@ -61,6 +67,9 @@
     <div id="ycba-thumbnail-controls" class="col-xs-2" align="center" style="padding-inline-end: 20px;">
       <a class="iiifpopover" data-bs-placement="bottom" title="Image Interoperability Framework" data-bs-toggle="popover" data-bs-content-id="iiifpopover_content_wrapper" id="iiifpopover">
         <img src="<%= path_to_image('logo-iiif.png') %>" class='img-responsive' alt='IIIF Actions' title='IIIF Actions' draggable></a>
+      <!--<button type="button" class="btn" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">
+        <img src="<%= path_to_image('logo-iiif.png') %>" class='img-responsive' alt='IIIF Actions' title='IIIF Actions' draggable>
+      </button>-->
       <div id="iiifpopover_content_wrapper" style="display: none;">
         <div>IIIF provides researchers rich metadata and media viewing options for comparison of works across cultural heritage collections. Visit the <a target="_blank" href="https://iiif.io">IIIF page</a> to learn more.</div>
         <hr>
