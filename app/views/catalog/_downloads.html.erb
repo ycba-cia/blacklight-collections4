@@ -1,8 +1,8 @@
 <% downloads,restricted = get_download_array_from_manifest %>
-<% puts "D:"+ downloads.inspect %>
-<% puts "R:" + restricted.inspect %>
 
-<div id="ycba-downloads" class="btn btn-primary col-xs-3" align="center" onclick="select_one_dl(<%= downloads %>,'<%= document["id"] %>',<%= document.to_json %>)">
+<div id="ycba-downloads" class="btn btn-primary col-xs-3" align="center" data-controller="downloads"
+     data-downloads-downloads="<%= downloads %>" data-downloads-id="<%= document["id"] %>"
+     data-downloads-doc="<%= document.to_json %>" data-action="click->downloads#select_one_dl">
   <% if restricted %>
     <%#= link_to("Print selected image","#downloadModal", data: {toggle: "modal"}, style: "color: white; text-decoration: none;" ) %>
     <a style="color: white; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#downloadModal">Print selected image</a>
