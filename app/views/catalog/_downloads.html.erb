@@ -1,17 +1,21 @@
 <% downloads,restricted = get_download_array_from_manifest %>
+<% puts "D:"+ downloads.inspect %>
+<% puts "R:" + restricted.inspect %>
 
 <div id="ycba-downloads" class="btn btn-primary col-xs-3" align="center" onclick="select_one_dl(<%= downloads %>,'<%= document["id"] %>',<%= document.to_json %>)">
   <% if restricted %>
-    <%= link_to("Print selected image","#downloadModal", data: {toggle: "modal"}, style: "color: white; text-decoration: none;" ) %>
+    <%#= link_to("Print selected image","#downloadModal", data: {toggle: "modal"}, style: "color: white; text-decoration: none;" ) %>
+    <a style="color: white; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#downloadModal">Print selected image</a>
   <% else %>
-    <%= link_to("Download/Print selected image","#downloadModal", data: {toggle: "modal"}, style: "color: white; text-decoration: none;" ) %>
+    <%#= link_to("Download/Print selected image","#downloadModal", data: {toggle: "modal"}, style: "color: white; text-decoration: none;" ) %>
+    <a style="color: white; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#downloadModal">Download/Print selected image</a>
   <% end %>
 </div>
 <div class="modal fade" id="downloadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <% if restricted %>
           <h4 class="modal-title" id="myModalLabel">Print Selected Image</h4>
         <% else %>
@@ -100,7 +104,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
         <!--<button type="button" class="btn btn-primary">Submit</button>-->
       </div>
     </div>
