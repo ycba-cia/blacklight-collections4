@@ -1,0 +1,12 @@
+<% if @view_type == "lido" %>
+  <%= render(@layout.new(field: @field)) do |component| %>
+    <% puts "LOGIC:"+ @field.key %>
+    <% next if ["citation_txt","exhibition_history_ss","curatorial_comment_ss"].include? @field.key %>
+    <% component.with_label do %>
+      <%= label %>
+    <% end %>
+    <% component.with_value do %>
+      <%= @field.render %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -43,8 +43,9 @@ module Blacklight
       next static_content if static_content.present?
 
       component ||= @presenter&.view_config&.metadata_component || Blacklight::DocumentMetadataComponent
+      view_type = @presenter&.document[@presenter&.view_config&.display_type_field][0]
 
-      component.new(*args, fields: fields || @presenter&.field_presenters || [], **kwargs)
+      component.new(*args, fields: fields || @presenter&.field_presenters || [], view_type: view_type,  **kwargs)
     end)
 
     renders_one :tabs
