@@ -28,4 +28,18 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  #
+  #get 'print/:id/:size/:index' => 'print#show' #deprecated, moved to catalog/print in line below
+  get 'catalog/print/:id1/:size/:index' => 'catalog#print'
+
+  get 'bookcover/isbn/:isbn' => 'book_cover#show'
+  get 'bookcover/isbn/:isbn/size/:size' => 'book_cover#show'
+
+  get 'catalog/:id/cite', :to => "catalog#cite", :as => "catalog_citation"
+
+  get 'vufind/Record/:vufind_id' => 'vufind#show'
+
+  get 'vufind/Search/Results' => 'catalog#index'
+
+  get 'oaicatmuseum/OAIHandler' => 'vufind#oaicat'
 end

@@ -91,8 +91,8 @@ export default class extends Controller {
 
         var print_info =  "";
         var print_info_all = "";
-        var print_path = "/print/"+id+"/1/"+index+"?caption="+download[1];
-        var print_path_all = "/print/"+id+"/9998/9998";
+        var print_path = "/catalog/print/"+id+"/1/"+index+"?caption="+download[1];
+        var print_path_all = "/catalog/print/"+id+"/9998/9998";
         if (download[2].length == 0) {
             print_info += "<a href='"+print_path+"' target=\"_blank\">";
             print_info += "<button id='print-button' type='button' class='btn btn-primary btn-sm' disabled>Print</button>";

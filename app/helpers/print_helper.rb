@@ -1,3 +1,4 @@
+#deprecated - moved to catalog controller as need access to document metadata not available in BL8 item page json
 require 'net/http'
 require 'json'
 
