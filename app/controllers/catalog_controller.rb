@@ -118,6 +118,7 @@ class CatalogController < ApplicationController
     config.show.partials.insert(1, :openseadragon)
     config.show.document_component = Blacklight::ShowpageDocumentComponent
     config.show.image_component = Blacklight::ShowpageImageComponent
+    #config.show.tabs_component = Blacklight::ShowpageTabsComponent
 
     #not needed as using viewComponents rather than partials
     #config.view.masonry.partials = [:compact_index]

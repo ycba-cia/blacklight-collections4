@@ -48,7 +48,10 @@ module Blacklight
       component.new(*args, fields: fields || @presenter&.field_presenters || [], view_type: view_type,  **kwargs)
     end)
 
-    renders_one :tabs
+    renders_one :tabs, (lambda do
+      component = @presenter&.view_config&.tabs_component || Blacklight::ShowpageTabsComponent
+      component.new(document: @presenter&.document)
+      end)
 
     # rubocop:disable Metrics/ParameterLists
     # @param document [Blacklight::DocumentPresenter]
@@ -100,6 +103,7 @@ module Blacklight
       set_slot(:image, nil) unless image
       set_slot(:no_image, nil) unless no_image
       set_slot(:metadata, nil) unless metadata
+      set_slot(:tabs, nil) unless tabs
     end
 
     #with_* methods implemented for compatibility with _show_main_content.html.erb method
