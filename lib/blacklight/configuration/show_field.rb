@@ -4,6 +4,7 @@ module Blacklight
       super
 
       #self.presenter ||= Blacklight::FieldPresenter
+      #this initialize from DisplayField overridding self.component
       self.component = Blacklight::ShowMetadataFieldComponent
 
     end

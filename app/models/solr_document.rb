@@ -63,6 +63,14 @@ class SolrDocument
     self['collection_ss']
   end
 
+  def collection_acc2
+    self['collection_ss']
+  end
+
+  def collection_acc3
+    self['collection_ss']
+  end
+
   def credit_line_acc
     self['credit_line_ss']
   end

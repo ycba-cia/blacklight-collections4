@@ -1104,6 +1104,22 @@ module ApplicationHelper
     link
   end
 
+  def get_frame_link2 options={}
+    return nil if options[:document][:callnumber_ss].nil?
+    cn = options[:document][:callnumber_ss][0]
+    solr_config = Rails.application.config_for(:blacklight)
+    solr = RSolr.connect :url => solr_config["url"]
+    if cn.end_with?("FR")
+      id = query_solr(solr,"callnumber_ss","#{cn.gsub("FR","")}")
+      link = link_to cn.gsub("FR",""), "#{request.protocol}#{request.host_with_port}/catalog/#{id}", method: :get
+    else
+      id = query_solr(solr,"callnumber_ss","#{cn}FR")
+      link = link_to "#{cn}FR", "#{request.protocol}#{request.host_with_port}/catalog/#{id}", method: :get
+    end
+    link = "" if id.nil?
+    link
+  end
+
   def query_solr(solr,field,value)
     response = solr.post "select", :params => {
         :fq=>"#{field}:\"#{value}\""

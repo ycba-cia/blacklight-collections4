@@ -297,6 +297,8 @@ class CatalogController < ApplicationController
     config.add_show_field 'callnumber_txt', :label => 'Accession Number', unless: :isLidoLoan?
     config.add_show_field 'type_ss', :label => 'Classification', if: :display_lido_field?
     config.add_show_field 'collection_ss', :label => 'Collection', helper_method: 'handle_lido_collections', if: :display_lido_field?
+    config.add_show_field 'collection_acc2', :accessor => 'collection_acc2', :label => 'Link to Framed Image', helper_method: 'get_frame_link2', if: :lido_frame?
+    config.add_show_field 'collection_acc3', :accessor => 'collection_acc3', :label => 'Link to Frame', helper_method: 'get_frame_link2', if: :lido_not_frame?
     config.add_show_field 'topic_ss', :label => 'Subject Terms', link_to_search: 'topic_facet', separator_options: break_separator, helper_method: 'sort_values_and_link_to_facet_frames', if: :display_lido_field?
     config.add_show_field 'topic_subjectPlace_ss', :label => 'Associated Places', link_to_search: true, separator_options: break_separator, helper_method: 'sort_values_and_link_to_facet', if: :display_lido_field?
     config.add_show_field 'topic_subjectActor_ss', :label => 'Associated People', link_to_search: true, separator_options: break_separator, if: :display_lido_field?
@@ -481,6 +483,20 @@ class CatalogController < ApplicationController
 
   def display_lido_field?(context, doc)
     doc['recordtype_ss'] and doc['recordtype_ss'][0].to_s == 'lido'
+  end
+
+  def lido_frame?(context, doc)
+    islido = doc['recordtype_ss'] and doc['recordtype_ss'][0].to_s == 'lido'
+    c = doc[:collection_ss][0]
+    bool = (islido and c=="Frames")
+    bool
+  end
+
+  def lido_not_frame?(context, doc)
+    islido = doc['recordtype_ss'] and doc['recordtype_ss'][0].to_s == 'lido'
+    c = doc[:collection_ss][0]
+    bool = (islido and c!="Frames")
+    bool
   end
 
   def display_marc_accessor_field?(context, doc)
