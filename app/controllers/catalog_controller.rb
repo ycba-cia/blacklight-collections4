@@ -47,7 +47,7 @@ class CatalogController < ApplicationController
       @item_data += print_fields("Title:","title_ss")
       @item_data += print_string("Caption:",@caption)
       @item_data += print_fields("Date:","publishDate_ss")
-      @item_data += print_fields("Medium:","format_ss")
+      @item_data += print_fields("Materials & Techniques:","format_ss")
       @item_data += print_fields("Dimensions:","physical_ss")
       @item_data += print_fields("Inscription(s)/Marks/Lettering:","description_ss")
       @item_data += print_fields("Credit Line:","credit_line_ss")

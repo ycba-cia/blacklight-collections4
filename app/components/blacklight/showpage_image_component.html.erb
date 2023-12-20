@@ -26,6 +26,7 @@
         }
     });
 </script>
+
 <% if document[:callnumber_ss] && document[:callnumber_ss][0].start_with?("L")  %>
   <div id="loan-header" align="left"><h3>On loan to the Yale Center for British Art</h3></div>
 <% end %>
@@ -109,3 +110,41 @@
   </div>
   <!-- former place of eshop-->
 </div>
+
+<div id="non-image-section">
+  <%= render_ycba_item_header(document, :tag => :span, :fontsize => "20px") %>
+  <div class="row">
+    <div id="ycba-request-photography" class="col-xs-12" align="center">
+      <%= link_to("Request photography", image_request_link(document), target: "_blank",) %>&nbsp;|&nbsp;
+      <%= link_to("Print Object", "/catalog/print/#{document[:id]}/1/9999", target: "_blank") %>
+      <% if document[:eshop_ss] %>
+        <%= link_to("Visit museum shop for related items", document[:eshop_ss][0], target: "_blank") %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<% unless manifest? %>
+  <script type="text/javascript">
+      console.log("no image");
+      //$("#non-image-section").show();
+      //$("#image-section").hide();
+      // Get the element with id="non-image-section" and show it
+      document.getElementById("non-image-section").style.display = "block";
+
+      // Get the element with id="image-section" and hide it
+      document.getElementById("image-section").style.display = "none";
+  </script>
+<% else %>
+  <script type="text/javascript">
+      console.log("image");
+      //$("#non-image-section").hide();
+      //$("#image-section").show();
+      // Get the element with id="non-image-section" and show it
+      document.getElementById("non-image-section").style.display = "none";
+
+      // Get the element with id="image-section" and hide it
+      document.getElementById("image-section").style.display = "block";
+  </script>
+<% end %>

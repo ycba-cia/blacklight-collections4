@@ -30,7 +30,7 @@ module Blacklight
     COLLECTION_INDEX_OFFSET = ViewComponent::VERSION::MAJOR < 3 ? 0 : 1
 
     renders_one :header, (lambda do
-      content_tag :h3, "Learning Viewcomponents"
+      #content_tag :h3, "Learning Viewcomponents"
     end)
 
     renders_one :image, (lambda do
