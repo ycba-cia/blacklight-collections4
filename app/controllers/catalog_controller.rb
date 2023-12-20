@@ -288,7 +288,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'titles_additional_ss', :label => 'Additional Title(s)', helper_method: 'render_titles_all', if: :display_lido_field?
     config.add_show_field 'title_collective_ss', :label => 'Part Of', helper_method: 'render_parent', :limit => 20
     config.add_show_field 'publishDate_ss', :label => 'Date', if: :display_lido_field?
-    config.add_show_field 'format_ss', :label => 'Medium', if: :display_lido_field?
+    config.add_show_field 'format_ss', :label => 'Materials & Techniques', if: :display_lido_field?
     config.add_show_field 'physical_ss',  :label => 'Dimensions', separator_options: comma_separator, if: :display_lido_field?
     config.add_show_field 'description_ss', :label => 'Inscription(s)/Marks/Lettering', helper_method: 'render_citation', if: :display_lido_field?
     config.add_show_field 'credit_line_ss', :label => 'Credit Line', if: :display_lido_field?
@@ -297,8 +297,8 @@ class CatalogController < ApplicationController
     config.add_show_field 'callnumber_txt', :label => 'Accession Number', unless: :isLidoLoan?
     config.add_show_field 'type_ss', :label => 'Classification', if: :display_lido_field?
     config.add_show_field 'collection_ss', :label => 'Collection', helper_method: 'handle_lido_collections', if: :display_lido_field?
-    config.add_show_field 'collection_acc2', :accessor => 'collection_acc2', :label => 'Link to Framed Image', helper_method: 'get_frame_link2', if: :lido_frame?
-    config.add_show_field 'collection_acc3', :accessor => 'collection_acc3', :label => 'Link to Frame', helper_method: 'get_frame_link2', if: :lido_not_frame?
+    config.add_show_field 'link_to_framed_image_acc', :accessor => 'link_to_framed_image_acc', :label => 'Link to Framed Image', helper_method: 'get_frame_link2', if: :lido_frame?
+    config.add_show_field 'link_to_frame_acc', :accessor => 'link_to_frame_acc', :label => 'Link to Frame', helper_method: 'get_frame_link2', if: :lido_not_frame?
     config.add_show_field 'topic_ss', :label => 'Subject Terms', link_to_search: 'topic_facet', separator_options: break_separator, helper_method: 'sort_values_and_link_to_facet_frames', if: :display_lido_field?
     config.add_show_field 'topic_subjectPlace_ss', :label => 'Associated Places', link_to_search: true, separator_options: break_separator, helper_method: 'sort_values_and_link_to_facet', if: :display_lido_field?
     config.add_show_field 'topic_subjectActor_ss', :label => 'Associated People', link_to_search: true, separator_options: break_separator, if: :display_lido_field?

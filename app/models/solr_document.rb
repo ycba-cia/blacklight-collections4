@@ -71,12 +71,12 @@ class SolrDocument
     self['collection_ss']
   end
 
-  def collection_acc2
-    self['collection_ss']
+  def link_to_framed_image_acc
+    self['id']
   end
 
-  def collection_acc3
-    self['collection_ss']
+  def link_to_frame_acc
+    self['id']
   end
 
   def credit_line_acc
