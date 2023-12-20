@@ -1,1 +1,7 @@
 <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+
+
+no need to override but good POC:
+show_metadata_field_component.rb
+show_metadata_field_component.html.erb
+lib/blacklight/configuration/show_field.rb
