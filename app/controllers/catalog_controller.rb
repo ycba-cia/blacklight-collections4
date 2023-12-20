@@ -327,6 +327,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'publisher_ss', :label => 'Published/Created', helper_method: 'add_alt_publisher', separator_options: break_separator, if: :display_marc_field?
     config.add_show_field 'physical_acc', accessor: 'physical_acc', label: 'Physical Description', if: :display_marc_accessor_field?
     #holdings inserted here, see _show_marc_html.erb
+    config.add_show_field 'holdings_acc', :accessor => 'holdings_acc', :label => 'Holdings', helper_method: 'get_holdings', if: :display_marc_accessor_field?
     config.add_show_field 'dummy_ort_marc_acc', :accessor => 'dummy_ort_marc_acc', :label => 'Copyright Status', helper_method: 'render_copyright_status', if: :display_marc_accessor_field?
     config.add_show_field 'orbis_link_acc', accessor: 'orbis_link_acc', :label => 'Full Orbis Record', helper_method: 'render_as_link', if: :display_marc_accessor_field?
     config.add_show_field 'resourceURL_ss', :label => 'Related Content', helper_method: 'render_related_content', if: :render_related_content?
@@ -338,6 +339,8 @@ class CatalogController < ApplicationController
     config.add_show_field 'topic_acc', accessor: 'topic_acc', :label => 'Subject Terms', link_to_search: 'topic_facet', separator_options: break_separator, helper_method: 'sort_values_and_link_to_topic_no_pipes', if: :display_marc_accessor_field?
     config.add_show_field 'form_genre_ss', :label => 'Form/Genre', link_to_search: true, separator_options: break_separator, if: :display_marc_field?
     config.add_show_field 'author_additional_ss', :label => 'Contributors', link_to_search: true, separator_options: break_separator, if: :display_marc_field?
+    config.add_show_field 'export_acc2', :accessor => 'export_acc2', :label => 'Export', helper_method: 'get_export_url_xml2', if: :display_marc_accessor_field?
+    config.add_show_field 'iiif_acc2', :accessor => 'iiif_acc2', :label => 'IIIF Manifest', helper_method: 'get_manifest_from_document2', if: :display_marc_accessor_field?
     #config.add_show_field 'cite_as', accessor: 'cite_as', :label => 'Cite As', if: :display_marc_accessor_field? #don't display per #18
 
 
@@ -489,14 +492,14 @@ class CatalogController < ApplicationController
   end
 
   def lido_frame?(context, doc)
-    islido = doc['recordtype_ss'] and doc['recordtype_ss'][0].to_s == 'lido'
+    islido = doc['recordtype_ss'][0].to_s == 'lido'
     c = doc[:collection_ss][0]
     bool = (islido and c=="Frames")
     bool
   end
 
   def lido_not_frame?(context, doc)
-    islido = doc['recordtype_ss'] and doc['recordtype_ss'][0].to_s == 'lido'
+    islido = doc['recordtype_ss'][0].to_s == 'lido'
     c = doc[:collection_ss][0]
     bool = (islido and c!="Frames")
     bool

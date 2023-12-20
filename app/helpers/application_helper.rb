@@ -651,9 +651,9 @@ module ApplicationHelper
     end
   end
 
-  def get_holdings(document)
+  def get_holdings options={}
     begin
-      doc = get_mfhd_doc(document)
+      doc = get_mfhd_doc(options[:document])
       mfhd_ids = doc.xpath('//record_list/holding[starts-with(mfhd_loc_code,"bacrb") or starts-with(mfhd_loc_code,"bacref") or starts-with(mfhd_loc_code,"bacia")]/mfhd_id/text()').to_a
 
     rescue
@@ -688,7 +688,7 @@ module ApplicationHelper
     #puts creditlines.inspect
 
     access = collections.each_with_index.map { |coll,i|
-      render_aeon_from_access_callnumber(document,coll,callnumbers[i],mfhd_ids[i])
+      render_aeon_from_access_callnumber(options[:document],coll,callnumbers[i],mfhd_ids[i])
     }
     access = [] if access.nil?
     #puts access.inspect
@@ -713,7 +713,7 @@ module ApplicationHelper
     }
     html = html[0...-5]
     if html.length==0
-      html += "<span>#{document[:collection_ss][0]}</span></br>"
+      html += "<span>#{options[:document][:collection_ss][0]}</span></br>"
       html += "<span>Not Available<span></br>"
     end
     return html.html_safe
