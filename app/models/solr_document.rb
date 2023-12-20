@@ -26,6 +26,14 @@ class SolrDocument
     self['url_ss']
   end
 
+  def export_acc
+    self['id']
+  end
+
+  def iiif_acc
+    self['id']
+  end
+
   def callnumber_acc
     self['callnumber_ss']
   end

@@ -794,6 +794,18 @@ module ApplicationHelper
     return url
   end
 
+  def get_export_url_xml2 options={}
+    unless options[:document][:recordtype_ss].nil?
+      if options[:document][:recordtype_ss][0].to_s == 'marc'
+        url = "https://libapp.library.yale.edu/OAI_BAC/src/OAIOrbisTool.jsp?verb=GetRecord&identifier=oai:orbis.library.yale.edu:"+get_bib_from_handle(options[:document])+"&metadataPrefix=marc21"
+      elsif options[:document][:recordtype_ss][0].to_s == 'lido'
+        url = "http://harvester-bl.britishart.yale.edu/oaicatmuseum/OAIHandler?verb=GetRecord&identifier=oai:tms.ycba.yale.edu:" + options[:document][:recordID_ss][0] +"&metadataPrefix=lido" if options[:document][:recordID_ss]
+      end
+    end
+    #puts "URL:" + url
+    return link_to("XML",url,target: :_blank)
+  end
+
   def get_manifest_from_document(doc)
     if doc[:recordtype_ss]
       if doc[:recordtype_ss][0].to_s == 'marc'
@@ -803,6 +815,17 @@ module ApplicationHelper
       end
     end
     return url
+  end
+
+  def get_manifest_from_document2 options={}
+    if options[:document][:recordtype_ss]
+      if options[:document][:recordtype_ss][0].to_s == 'marc'
+        url = "https://manifests.collections.yale.edu/ycba/orb/" + options[:document][:id].split(":")[1]
+      elsif options[:document][:recordtype_ss][0].to_s == 'lido'
+        url = "https://manifests.collections.yale.edu/ycba/obj/" + options[:document][:id].split(":")[1]
+      end
+    end
+    return link_to("JSON",url,target: :_blank)
   end
 
   #deprecated

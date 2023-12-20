@@ -312,6 +312,8 @@ class CatalogController < ApplicationController
     config.add_show_field 'exhibition_history_ss', :label => 'Exhibition History', helper_method: 'render_exhibitions', if: :display_lido_field?
     config.add_show_field 'citation_txt', :label => 'Publications', helper_method: 'render_tms_citation_presorted', if: :display_lido_field?
     config.add_show_field 'url_ss', :label => 'Link', helper_method: 'render_as_link', if: :display_lido_field?
+    config.add_show_field 'export_acc', :accessor => 'export_acc', :label => 'Export', helper_method: 'get_export_url_xml2', if: :display_lido_field?
+    config.add_show_field 'iiif_acc', :accessor => 'iiif_acc', :label => 'IIIF Manifest', helper_method: 'get_manifest_from_document2', if: :display_lido_field?
 
     #marc fields in detailed view (note: accessors needed when field both in marc and lido, and special display_marc_accessor_field method to not show empty fields)
     config.add_show_field 'loc_naf_author_acc', :accessor => 'loc_naf_author_acc',  :label => 'Creator', helper_method: 'link_to_author', separator_options: break_separator, if: :display_marc_accessor_field?
