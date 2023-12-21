@@ -92,9 +92,6 @@ GEM
     blacklight-gallery (4.4.0)
       blacklight (>= 7.17, < 9)
       rails (>= 6.1, < 8)
-    blacklight_range_limit (8.3.0)
-      blacklight (>= 7.25.2, < 9)
-      deprecation
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     bootstrap (5.3.1)
@@ -118,8 +115,6 @@ GEM
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
-    deprecation (1.1.0)
-      activesupport
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     drb (2.1.1)
@@ -333,7 +328,6 @@ PLATFORMS
 DEPENDENCIES
   blacklight (~> 8.0, >= 8.0.1)
   blacklight-gallery (~> 4.3)
-  blacklight_range_limit (~> 8.3)
   bootsnap
   bootstrap (~> 5.1)
   capybara

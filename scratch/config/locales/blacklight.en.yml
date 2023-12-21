@@ -1,0 +1,12 @@
+en:
+  blacklight:
+    application_name: 'Blacklight'
+    search:
+      facets:
+        range:
+          form:
+            start_label: "%{field_label} range start"
+            end_label: "%{field_label} range end"
+            submit: 'Apply'
+            single_value: "%{start}"
+            range_value: "%{start} to %{end}"
