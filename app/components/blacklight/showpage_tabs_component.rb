@@ -104,5 +104,44 @@ module Blacklight
       value ||= ''
     end
 
+    def referenced_works?(document)
+      solr_config = Rails.application.config_for(:blacklight)
+      solr = RSolr.connect :url => solr_config["url"]
+      response = solr.post "select", :params => {
+          :fq=>"ilsnumber_ss:\"#{document["id"].gsub("orbis:","")}\"", :rows=>0
+      }
+      return false if response['response']['numFound'] == 0
+      return true
+    end
+
+    def format_contents_tab(document)
+      s = "<ul style='list-style: disc; margin-left: 15px;'>"
+      document["marc_contents_ss"].each do |s1|
+        a = s1.split(" -- ")
+        a.each do |s2|
+          s = s + "<li>" + s2 + "</li>"
+        end
+      end
+      s = s + "</ul>"
+      s.html_safe
+    end
+
+    def link_to_referenced_ycba_objects(id)
+      num_found = get_num_found("ilsnumber_ss",id.gsub("orbis:",""))
+      prelabel = "View the"
+      label = "Works referenced in this item"
+      label = "Work referenced in this item" if num_found == 1
+      link_to "#{prelabel} #{num_found} #{label}","#{request.protocol}#{request.host_with_port}/?utf8=✓&search_field=Fielded&q=ilsnumber_ss%3A#{id.gsub("orbis:","")}",target: :_blank, rel: "nofollow"
+    end
+
+    def get_num_found(field,value)
+      solr_config = Rails.application.config_for(:blacklight)
+      solr = RSolr.connect :url => solr_config["url"]
+      response = solr.post "select", :params => {
+          :fq=>"#{field}:\"#{value}\"", :rows=>0
+      }
+      response['response']['numFound']
+    end
+
   end
 end
