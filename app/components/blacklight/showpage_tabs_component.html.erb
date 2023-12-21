@@ -245,122 +245,122 @@
 
       <% if tab_active %>
         <% if document_field_exists?(document,"marc_contents_ss")  %>
-          <li class="nav-item active"><a class="nav-link" href="#0pane" data-toggle="tab">Contents</br>&nbsp</a></li>
+          <li class="nav-item active"><a class="nav-link" href="#0pane" data-bs-toggle="tab" role="tab" aria-controls="Contents" aria-selected="true">Contents</br>&nbsp</a></li>
           <% tab_active = false %>
         <% end %>
       <% else %>
         <% if document_field_exists?(document,"marc_contents_ss") %>
-          <li class="nav-item"><a class="nav-link" href="#0pane" data-toggle="tab">Contents</br>&nbsp</a></li>
+          <li class="nav-item"><a class="nav-link" href="#0pane" data-bs-toggle="tab" role="tab" aria-controls="Contents" aria-selected="false">Contents</br>&nbsp</a></li>
         <% end %>
       <% end %>
 
       <% if tab_active %>
         <% if document_field_exists?(document,"curatorial_comment_ss")  %>
-          <li class="nav-item active"><a class="nav-link" href="#1pane" data-toggle="tab">Curatorial</br>Comments</a></li>
+          <li class="nav-item active"><a class="nav-link" href="#1pane" data-bs-toggle="tab" role="tab" aria-controls="Curatorial Comments" aria-selected="true">Curatorial</br>Comments</a></li>
           <% tab_active = false %>
         <% end %>
       <% else %>
         <% if document_field_exists?(document,"curatorial_comment_ss") %>
-          <li class="nav-item"><a class="nav-link" href="#1pane" data-toggle="tab">Curatorial</br>Comments</a></li>
+          <li class="nav-item"><a class="nav-link" href="#1pane" data-bs-toggle="tab" role="tab" aria-controls="Curatorial Comments" aria-selected="false">Curatorial</br>Comments</a></li>
         <% end %>
       <% end %>
 
       <% if tab_active %>
         <% if document_field_exists?(document,"curatorial_description_ss")  %>
-          <li class="nav-item active"><a class="nav-link" href="#2pane" data-toggle="tab">Curatorial</br>Descriptions</a></li>
+          <li class="nav-item active"><a class="nav-link" href="#2pane" data-bs-toggle="tab" role="tab" aria-controls="Curatorial Descriptions" aria-selected="true">Curatorial</br>Descriptions</a></li>
           <% tab_active = false %>
         <% end %>
       <% else %>
         <% if document_field_exists?(document,"curatorial_description_ss")  %>
-          <li class="nav-item"><a class="nav-link" href="#2pane" data-toggle="tab">Curatorial</br>Descriptions</a></li>
+          <li class="nav-item"><a class="nav-link" href="#2pane" data-bs-toggle="tab" role="tab" aria-controls="Curatorial Descriptions" aria-selected="false">Curatorial</br>Descriptions</a></li>
         <% end %>
       <% end %>
 
       <% if tab_active %>
         <% if document_field_exists?(document,"gallery_label_ss")  %>
-          <li class="nav-item active"><a class="nav-link" href="#3pane" data-toggle="tab">Gallery</br>Labels</a></li>
+          <li class="nav-item active"><a class="nav-link" href="#3pane" data-bs-toggle="tab" role="tab" aria-controls="Gallery Labels" aria-selected="true">Gallery</br>Labels</a></li>
           <% tab_active = false %>
         <% end %>
       <% else %>
         <% if document_field_exists?(document,"gallery_label_ss")  %>
-          <li class="nav-item"><a class="nav-link" href="#3pane" data-toggle="tab">Gallery</br>Labels</a></li>
+          <li class="nav-item"><a class="nav-link" href="#3pane" data-bs-toggle="tab" role="tab" aria-controls="Gallery Labels" aria-selected="false">Gallery</br>Labels</a></li>
         <% end %>
       <% end %>
 
       <% if tab_active %>
         <% if document_field_exists?(document,"pub_cat_entry_ss")  %>
-          <li class="nav-item active"><a class="nav-link" href="#4pane" data-toggle="tab">Published</br>Catalog Entries</a></li>
+          <li class="nav-item active"><a class="nav-link" href="#4pane" data-bs-toggle="tab" role="tab" aria-controls="Published Catalog Entries" aria-selected="true">Published</br>Catalog Entries</a></li>
           <% tab_active = false %>
         <% end %>
       <% else %>
         <% if document_field_exists?(document,"pub_cat_entry_ss")  %>
-          <li class="nav-item"><a class="nav-link" href="#4pane" data-toggle="tab">Published</br>Catalog Entries</a></li>
+          <li class="nav-item"><a class="nav-link" href="#4pane" data-bs-toggle="tab" role="tab" aria-controls="Published Catalog Entries" aria-selected="false">Published</br>Catalog Entries</a></li>
         <% end %>
       <% end %>
 
       <% if tab_active %>
         <% if document_field_exists?(document,"work_excerpt_ss")  %>
-          <li class="nav-item active"><a class="nav-link" href="#5pane" data-toggle="tab">Excerpts from</br>this Work</a></li>
+          <li class="nav-item active"><a class="nav-link" href="#5pane" data-bs-toggle="tab" role="tab" aria-controls="Excerpts from this Work" aria-selected="true">Excerpts from</br>this Work</a></li>
           <% tab_active = false %>
         <% end %>
       <% else %>
         <% if document_field_exists?(document,"work_excerpt_ss")  %>
-          <li class="nav-item"><a class="nav-link" href="#5pane" data-toggle="tab">Excerpts from</br>this Work</a></li>
+          <li class="nav-item"><a class="nav-link" href="#5pane" data-bs-toggle="tab" role="tab" aria-controls="Excerpts from this Work" aria-selected="false">Excerpts from</br>this Work</a></li>
         <% end %>
       <% end %>
 
       <% if tab_active %>
         <% if document_field_exists?(document,"artists_statement_ss")  %>
-          <li class="nav-item active"><a class="nav-link" href="#6pane" data-toggle="tab">Artist's</br>Statement</a></li>
+          <li class="nav-item active"><a class="nav-link" href="#6pane" data-bs-toggle="tab" role="tab" aria-controls="Artist's Statement" aria-selected="true">Artist's</br>Statement</a></li>
           <% tab_active = false %>
         <% end %>
       <% else %>
         <% if document_field_exists?(document,"artists_statement_ss")  %>
-          <li class="nav-item"><a class="nav-link" href="#6pane" data-toggle="tab">Artist's</br>Statement</a></li>
+          <li class="nav-item"><a class="nav-link" href="#6pane" data-bs-toggle="tab" role="tab" aria-controls="Artist's Statement" aria-selected="false">Artist's</br>Statement</a></li>
         <% end %>
       <% end %>
 
       <% if tab_active %>
         <% if document_field_exists?(document,"provenance_ss")  %>
-          <li class="nav-item active"><a class="nav-link" href="#7pane" data-toggle="tab">Provenance</br>&nbsp</a></li>
+          <li class="nav-item active"><a class="nav-link" href="#7pane" data-bs-toggle="tab" role="tab" aria-controls="Provenance" aria-selected="true">Provenance</br>&nbsp</a></li>
           <% tab_active = false %>
         <% end %>
       <% else %>
         <% if document_field_exists?(document,"provenance_ss")  %>
-          <li class="nav-item"><a class="nav-link" href="#7pane" data-toggle="tab">Provenance</br>&nbsp</a></li>
+          <li class="nav-item"><a class="nav-link" href="#7pane" data-bs-toggle="tab" role="tab" aria-controls="Provenance" aria-selected="false">Provenance</br>&nbsp</a></li>
         <% end %>
       <% end %>
 
       <% if tab_active %>
         <% if document_field_exists?(document,"exhibition_history_ss")  %>
-          <li class="nav-item active"><a class="nav-link" href="#8pane" data-toggle="tab">Exhibition</br>History</a></li>
+          <li class="nav-item active"><a class="nav-link" href="#8pane" data-bs-toggle="tab" role="tab" aria-controls="Exhibition History" aria-selected="true">Exhibition</br>History</a></li>
           <% tab_active = false %>
         <% end %>
       <% else %>
         <% if document_field_exists?(document,"exhibition_history_ss")  %>
-          <li class="nav-item"><a class="nav-link" href="#8pane" data-toggle="tab">Exhibition</br>History</a></li>
+          <li class="nav-item"><a class="nav-link" href="#8pane" data-bs-toggle="tab" role="tab" aria-controls="Exhibition History" aria-selected="false">Exhibition</br>History</a></li>
         <% end %>
       <% end %>
 
       <% if tab_active %>
         <% if document_field_exists?(document,"citation_ss")  %>
-          <li class="nav-item active"><a class="nav-link" href="#9pane" data-toggle="tab">Bibliography</br>&nbsp</a></li>
+          <li class="nav-item active"><a class="nav-link" href="#9pane" data-bs-toggle="tab" role="tab" aria-controls="Bibliography" aria-selected="true">Bibliography</br>&nbsp</a></li>
           <% tab_active = false %>
         <% end %>
       <% else %>
         <% if document_field_exists?(document,"citation_ss")  %>
-          <li class="nav-item"><a class="nav-link" href="#9pane" data-toggle="tab">Bibliography</br>&nbsp</a></li>
+          <li class="nav-item"><a class="nav-link" href="#9pane" data-bs-toggle="tab" role="tab" aria-controls="Bibliography" aria-selected="false">Bibliography</br>&nbsp</a></li>
         <% end %>
       <% end %>
 
       <% if tab_active %>
         <% if referenced_works?(document)  %>
-          <li class="nav-item active"><a class="nav-link" href="#10pane" data-toggle="tab">Referenced</br>YCBA Works</a></li>
+          <li class="nav-item active"><a class="nav-link" href="#10pane" data-bs-toggle="tab" role="tab" aria-controls="Referenced YCBA Works" aria-selected="true">Referenced</br>YCBA Works</a></li>
           <% tab_active = false %>
         <% end %>
       <% else %>
         <% if referenced_works?(document)  %>
-          <li class="nav-item"><a class="nav-link" href="#10pane" data-toggle="tab">Referenced</br>YCBA Works</a></li>
+          <li class="nav-item"><a class="nav-link" href="#10pane" data-bs-toggle="tab" role="tab" aria-controls="Referenced YCBA Works" aria-selected="false">Referenced</br>YCBA Works</a></li>
         <% end %>
       <% end %>
 
@@ -372,10 +372,10 @@
 
     <% if document_field_exists?(document,"marc_contents_ss") %>
       <% if tab_active %>
-        <div class="tab-pane active" id="0pane">
+        <div class="tab-pane active" id="0pane" role="tabpanel" aria-labelledby="contents-tab">
           <% tab_active = false %>
       <% else %>
-        <div class="tab-pane" id="0pane">
+        <div class="tab-pane" id="0pane" role="tabpanel" aria-labelledby="contents-tab">
       <% end %>
       <%= format_contents_tab(document) %>
       </div>
@@ -383,10 +383,10 @@
 
     <% if document_field_exists?(document,"curatorial_comment_ss") %>
       <% if tab_active %>
-        <div class="tab-pane active" id="1pane">
+        <div class="tab-pane active" id="1pane" role="tabpanel" aria-labelledby="curatorial-comments-tab">
           <% tab_active = false %>
       <% else %>
-        <div class="tab-pane" id="1pane">
+        <div class="tab-pane" id="1pane" role="tabpanel" aria-labelledby="curatorial-comments-tab">
       <% end %>
       <% combine_curatorial_comments_tab(document).each_with_index do |field, i| %>
         <% if i > 0 %></br><% end %>
@@ -398,10 +398,10 @@
 
     <% if document_field_exists?(document,"curatorial_description_ss") %>
       <% if tab_active %>
-        <div class="tab-pane active" id="2pane">
+        <div class="tab-pane active" id="2pane" role="tabpanel" aria-labelledby="curatorial-descriptions-tab">
           <% tab_active = false %>
       <% else %>
-        <div class="tab-pane" id="2pane">
+        <div class="tab-pane" id="2pane" role="tabpanel" aria-labelledby="curatorial-descriptions-tab">
       <% end %>
       <% document["curatorial_description_ss"].each_with_index do |field, i| %>
         <% if i > 0 %></br><% end %>
@@ -413,10 +413,10 @@
 
     <% if document_field_exists?(document,"gallery_label_ss") %>
       <% if tab_active %>
-        <div class="tab-pane active" id="3pane">
+        <div class="tab-pane active" id="3pane" role="tabpanel" aria-labelledby="gallery-labels-tab">
           <% tab_active = false %>
       <% else %>
-        <div class="tab-pane" id="3pane">
+        <div class="tab-pane" id="3pane" role="tabpanel" aria-labelledby="gallery-labels-tab">
       <% end %>
       <% document["gallery_label_ss"].each_with_index do |field, i| %>
         <% if i > 0 %></br><hr style="border-top: 1px solid;"></br><% end %>
@@ -428,10 +428,10 @@
 
     <% if document_field_exists?(document,"pub_cat_entry_ss") %>
       <% if tab_active %>
-        <div class="tab-pane active" id="4pane">
+        <div class="tab-pane active" id="4pane" role="tabpanel" aria-labelledby="pub-cat-entry-tab">
           <% tab_active = false %>
       <% else %>
-        <div class="tab-pane" id="4pane">
+        <div class="tab-pane" id="4pane" role="tabpanel" aria-labelledby="pub-cat-entry-tab">
       <% end %>
       <% document["pub_cat_entry_ss"].each_with_index do |field, i| %>
         <% if i > 0 %></br><hr style="border-top: 1px solid;"></br><% end %>
@@ -443,10 +443,10 @@
 
     <% if document_field_exists?(document,"work_excerpt_ss") %>
       <% if tab_active %>
-        <div class="tab-pane active" id="5pane">
+        <div class="tab-pane active" id="5pane" role="tabpanel" aria-labelledby="excerpts-from-this-work-tab">
           <% tab_active = false %>
       <% else %>
-        <div class="tab-pane" id="5pane">
+        <div class="tab-pane" id="5pane" role="tabpanel" aria-labelledby="excerpts-from-this-work-tab">
       <% end %>
       <% document["work_excerpt_ss"].each_with_index do |field, i| %>
         <% if i > 0 %></br><hr style="border-top: 1px solid;"></br><% end %>
@@ -458,10 +458,10 @@
 
     <% if document_field_exists?(document,"artists_statement_ss") %>
       <% if tab_active %>
-        <div class="tab-pane active" id="6pane">
+        <div class="tab-pane active" id="6pane" role="tabpanel" aria-labelledby="artists-statement-tab">
           <% tab_active = false %>
       <% else %>
-        <div class="tab-pane" id="6pane">
+        <div class="tab-pane" id="6pane" role="tabpanel" aria-labelledby="artists-statement-tab">
       <% end %>
       <% document["artists_statement_ss"].each_with_index do |field, i| %>
         <% if i > 0 %></br><hr style="border-top: 1px solid;"></br><% end %>
@@ -473,10 +473,10 @@
 
     <% if document_field_exists?(document,"provenance_ss") %>
       <% if tab_active %>
-        <div class="tab-pane active" id="7pane">
+        <div class="tab-pane active" id="7pane" role="tabpanel" aria-labelledby="provenance-tab">
           <% tab_active = false %>
       <% else %>
-        <div class="tab-pane" id="7pane">
+        <div class="tab-pane" id="7pane" role="tabpanel" aria-labelledby="provenance-tab">
       <% end %>
       <% document["provenance_ss"].each_with_index do |field, i| %>
         <% if i > 0 %></br><% end %>
@@ -487,10 +487,10 @@
 
     <% if document_field_exists?(document,"exhibition_history_ss") %>
       <% if tab_active %>
-        <div class="tab-pane active" id="8pane">
+        <div class="tab-pane active" id="8pane" role="tabpanel" aria-labelledby="exhibition-history-tab">
           <% tab_active = false %>
       <% else %>
-        <div class="tab-pane" id="8pane">
+        <div class="tab-pane" id="8pane" role="tabpanel" aria-labelledby="exhibition-history-tab">
       <% end %>
       <%= render_exhibitions_tab(document) %>
       </div>
@@ -498,10 +498,10 @@
 
     <% if document_field_exists?(document,"citation_ss") %>
       <% if tab_active %>
-        <div class="tab-pane active" id="9pane">
+        <div class="tab-pane active" id="9pane" role="tabpanel" aria-labelledby="bibliography-tab">
           <% tab_active = false %>
       <% else %>
-        <div class="tab-pane" id="9pane">
+        <div class="tab-pane" id="9pane" role="tabpanel" aria-labelledby="bibliography-tab">
       <% end %>
       <%= render_marc_citation_presorted_tab(document) %>
       </div>
@@ -509,10 +509,10 @@
 
     <% if referenced_works?(document) %>
       <% if tab_active %>
-        <div class="tab-pane active" id="10pane">
+        <div class="tab-pane active" id="10pane" role="tabpanel" aria-labelledby="referenced-ycba-works-tab">
           <% tab_active = false %>
       <% else %>
-        <div class="tab-pane" id="10pane">
+        <div class="tab-pane" id="10pane" role="tabpanel" aria-labelledby="referenced-ycba-works-tab">
       <% end %>
       <%= link_to_referenced_ycba_objects(document["id"]) %>
       </div>
